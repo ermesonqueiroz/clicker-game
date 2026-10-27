@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://c7xud8saydir4" path="res://scripts/common/SoundQueue.cs" id="3_e0qya"]
 [ext_resource type="AudioStream" uid="uid://ckx3enctc801f" path="res://assets/sfx/chopping_wood/ChoppingWood1.wav" id="4_ktobl"]
 [ext_resource type="AudioStream" uid="uid://co44i4jmk2kgo" path="res://assets/sfx/chopping_wood/ChoppingWood2.wav" id="5_n1l54"]
+[ext_resource type="AudioStream" uid="uid://dc5ow050hmiok" path="res://assets/sfx/chopping_wood/ChoppingWood3.wav" id="6_e0qya"]
+[ext_resource type="AudioStream" uid="uid://dnm5iw1a35wip" path="res://assets/sfx/chopping_wood/ChoppingWood4.wav" id="7_ktobl"]
 
 [node name="SoundManager" type="Node" unique_id=1516358757 node_paths=PackedStringArray("_choppingWoodSoundPool")]
 script = ExtResource("1_u2w14")
@@ -29,3 +31,19 @@ metadata/_custom_type_script = "uid://c7xud8saydir4"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ChoppinWoodSoundPool/SoundQueue2" unique_id=142317768]
 stream = ExtResource("5_n1l54")
+
+[node name="SoundQueue3" type="Node" parent="ChoppinWoodSoundPool" unique_id=898928383]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ChoppinWoodSoundPool/SoundQueue3" unique_id=1668738355]
+stream = ExtResource("6_e0qya")
+
+[node name="SoundQueue4" type="Node" parent="ChoppinWoodSoundPool" unique_id=369864543]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ChoppinWoodSoundPool/SoundQueue4" unique_id=1262103947]
+stream = ExtResource("7_ktobl")

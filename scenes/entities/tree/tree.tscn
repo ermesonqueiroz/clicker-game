@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://35ylp64tgslk" path="res://scenes/fx/explosion/explosion.tscn" id="6_8aru3"]
 [ext_resource type="Script" uid="uid://c672aqw2o6nce" path="res://scripts/components/SpawnCollectibleFeedbackComponent.cs" id="7_eyn60"]
 [ext_resource type="Texture2D" uid="uid://dudunnwnnh7gr" path="res://assets/ui/collectibles/Wood.png" id="8_sxpgj"]
+[ext_resource type="Script" uid="uid://wdxa321umvk8" path="res://scripts/components/HarvestBreakComponent.cs" id="9_wx3uv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fnbbo"]
 atlas = ExtResource("1_hh33m")
@@ -16,6 +17,10 @@ region = Rect2(0, 192, 192, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_yf60l"]
 atlas = ExtResource("1_hh33m")
 region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx3uv"]
+atlas = ExtResource("1_hh33m")
+region = Rect2(0, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hh33m"]
 atlas = ExtResource("1_hh33m")
@@ -48,6 +53,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_wx3uv")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_hh33m")
 }, {
 "duration": 1.0,
@@ -64,19 +77,20 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Tree" type="Area2D" unique_id=736537570 node_paths=PackedStringArray("harvestClickComponent", "harvestSpriteFeedbackComponent", "spawnEffectFeedbackComponent", "spawnCollectibleFeedbackComponent", "sprite", "soundPool")]
+[node name="Tree" type="Area2D" unique_id=736537570 node_paths=PackedStringArray("harvestClickComponent", "harvestSpriteFeedbackComponent", "spawnEffectFeedbackComponent", "spawnCollectibleFeedbackComponent", "harvestBreakComponent", "sprite", "_clickArea")]
 script = ExtResource("1_4drvb")
 harvestClickComponent = NodePath("Components/HarvestClickComponent")
 harvestSpriteFeedbackComponent = NodePath("Components/HarvestSpriteFeedbackComponent")
 spawnEffectFeedbackComponent = NodePath("Components/SpawnEffectFeedbackComponent")
 spawnCollectibleFeedbackComponent = NodePath("Components/SpawnCollectibleFeedbackComponent")
+harvestBreakComponent = NodePath("Components/HarvestBreakComponent")
 sprite = NodePath("Sprite")
-soundPool = NodePath("")
+_clickArea = NodePath(".")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1768346751]
 position = Vector2(0, -72)
 sprite_frames = SubResource("SpriteFrames_85bfa")
-animation = &"click"
+animation = &"die"
 autoplay = "idle"
 
 [node name="ClickArea" type="CollisionPolygon2D" parent="." unique_id=626649657]
@@ -104,3 +118,7 @@ metadata/_custom_type_script = "uid://dmmsshr7d6e6t"
 script = ExtResource("7_eyn60")
 texture = ExtResource("8_sxpgj")
 metadata/_custom_type_script = "uid://c672aqw2o6nce"
+
+[node name="HarvestBreakComponent" type="Node" parent="Components" unique_id=529840990]
+script = ExtResource("9_wx3uv")
+metadata/_custom_type_script = "uid://wdxa321umvk8"

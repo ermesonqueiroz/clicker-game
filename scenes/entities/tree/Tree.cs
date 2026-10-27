@@ -2,6 +2,7 @@ using Godot;
 using Game.Components;
 using Game.Common;
 using Game.Globals;
+using System;
 
 namespace Game.Entities;
 
@@ -20,26 +21,42 @@ public partial class Tree : Area2D
 	public SpawnCollectibleFeedbackComponent spawnCollectibleFeedbackComponent;
 
 	[Export]
+	public HarvestBreakComponent harvestBreakComponent;
+
+	[Export]
 	public AnimatedSprite2D sprite;
 
 	[Export]
-	public SoundPool soundPool;
+	private Area2D _clickArea;
 
 	public override void _Ready()
 	{
 		harvestClickComponent.Clicked += OnTreeClicked;
+		harvestBreakComponent.Breaked += OnTreeBreaked;
+		sprite.AnimationFinished += OnTreeAnimationFinished;
 	}
 
-	public async void OnTreeClicked()
+    public void OnTreeClicked()
 	{
 		sprite.Play("click");
-		sprite.AnimationFinished += () => sprite.Play("idle");
-
 		harvestSpriteFeedbackComponent.Execute();
-		spawnEffectFeedbackComponent.Execute(GlobalPosition);
-		spawnCollectibleFeedbackComponent.Execute(GlobalPosition);
 		SoundManager.Instance.PlayChoppingWoodSound();
+		harvestBreakComponent.RegisterClick();
+	}
 
-		QueueFree();
+	public void OnTreeBreaked()
+	{
+		sprite.Play("die");
+		harvestClickComponent.Enabled = false;
+		spawnEffectFeedbackComponent.Execute(GlobalPosition);
+		spawnCollectibleFeedbackComponent.SpawnCollectible(GlobalPosition, 3);
+	}
+
+	private void OnTreeAnimationFinished()
+	{
+		if (sprite.Animation == "click")
+		{
+			sprite.Play("idle");
+		}
 	}
 }
