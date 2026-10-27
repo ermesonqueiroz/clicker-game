@@ -1,4 +1,5 @@
 using Godot;
+using Game.Globals;
 
 namespace Game.Components;
 
@@ -12,6 +13,6 @@ public partial class SpawnEffectFeedbackComponent : Node
 	{
 		Node2D explosionInstance = effectScene.Instantiate<Node2D>();
 		explosionInstance.Position = position;
-		GetTree().CurrentScene.AddChild(explosionInstance);
+		GameManager.Instance.AddChild(explosionInstance);
 	}
 }

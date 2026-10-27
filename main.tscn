@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://bhtcj5wwx6j7c"]
 
+[ext_resource type="Script" uid="uid://bnaxmro75rr7s" path="res://Main.cs" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://djcyiying6smd" path="res://scenes/game.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dfkboagi0qmlg" path="res://scenes/ui/wood_amount.tscn" id="2_0xm2m"]
 
-[node name="Main" type="Node2D" unique_id=927466973]
+[node name="Main" type="Node2D" unique_id=927466973 node_paths=PackedStringArray("UiContainer")]
+script = ExtResource("1_h2yge")
+UiContainer = NodePath("CanvasLayer/SubViewportContainer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=981078403]
 
@@ -21,6 +24,7 @@ stretch = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 canvas_item_default_texture_filter = 0
+physics_object_picking = true
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 

@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://ch7bakx60yqdi" path="res://scripts/components/HarvestSpriteFeedbackComponent.cs" id="4_fnbbo"]
 [ext_resource type="Script" uid="uid://dmmsshr7d6e6t" path="res://scripts/components/SpawnEffectFeedbackComponent.cs" id="5_yf60l"]
 [ext_resource type="PackedScene" uid="uid://35ylp64tgslk" path="res://scenes/fx/explosion/explosion.tscn" id="6_8aru3"]
+[ext_resource type="Script" uid="uid://c672aqw2o6nce" path="res://scripts/components/SpawnCollectibleFeedbackComponent.cs" id="7_eyn60"]
+[ext_resource type="Texture2D" uid="uid://dudunnwnnh7gr" path="res://assets/ui/collectibles/Wood.png" id="8_sxpgj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fnbbo"]
 atlas = ExtResource("1_hh33m")
@@ -62,11 +64,14 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Tree" type="Area2D" unique_id=736537570 node_paths=PackedStringArray("harvestClickComponent", "harvestSpriteFeedbackComponent", "spawnEffectFeedbackComponent", "sprite")]
+[node name="Tree" type="Area2D" unique_id=736537570 node_paths=PackedStringArray("harvestClickComponent", "harvestSpriteFeedbackComponent", "spawnEffectFeedbackComponent", "spawnCollectibleFeedbackComponent", "sprite")]
 script = ExtResource("1_4drvb")
+input_pickable = true
+collision_layer = 1
 harvestClickComponent = NodePath("Components/HarvestClickComponent")
 harvestSpriteFeedbackComponent = NodePath("Components/HarvestSpriteFeedbackComponent")
 spawnEffectFeedbackComponent = NodePath("Components/SpawnEffectFeedbackComponent")
+spawnCollectibleFeedbackComponent = NodePath("Components/SpawnCollectibleFeedbackComponent")
 sprite = NodePath("Sprite")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1768346751]
@@ -95,3 +100,8 @@ metadata/_custom_type_script = "uid://ch7bakx60yqdi"
 script = ExtResource("5_yf60l")
 effectScene = ExtResource("6_8aru3")
 metadata/_custom_type_script = "uid://dmmsshr7d6e6t"
+
+[node name="SpawnCollectibleFeedbackComponent" type="Node" parent="Components" unique_id=277879574]
+script = ExtResource("7_eyn60")
+texture = ExtResource("8_sxpgj")
+metadata/_custom_type_script = "uid://c672aqw2o6nce"

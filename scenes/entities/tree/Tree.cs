@@ -15,6 +15,9 @@ public partial class Tree : Area2D
 	public SpawnEffectFeedbackComponent spawnEffectFeedbackComponent;
 
 	[Export]
+	public SpawnCollectibleFeedbackComponent spawnCollectibleFeedbackComponent;
+
+	[Export]
 	public AnimatedSprite2D sprite;
 
 	public override void _Ready()
@@ -29,6 +32,7 @@ public partial class Tree : Area2D
 
 		harvestSpriteFeedbackComponent.Execute();
 		spawnEffectFeedbackComponent.Execute(GlobalPosition);
+		spawnCollectibleFeedbackComponent.Execute(GlobalPosition);
 
 		QueueFree();
 	}
