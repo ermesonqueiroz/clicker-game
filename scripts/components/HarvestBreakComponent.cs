@@ -22,4 +22,9 @@ public partial class HarvestBreakComponent : Node
 			EmitSignal(SignalName.Breaked);
 		}
 	}
+
+	public void Reset()
+	{
+		ClicksAmount = 0;
+	}
 }
