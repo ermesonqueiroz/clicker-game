@@ -1,0 +1,115 @@
+[gd_resource type="TileSet" format=3 uid="uid://c6kf8d73vc04d"]
+
+[ext_resource type="Texture2D" uid="uid://dgt6ej4c1nkjy" path="res://assets/terrain/Water.png" id="1_t4mfu"]
+[ext_resource type="Texture2D" uid="uid://8fo8hos5jvfj" path="res://assets/terrain/ground/Tilemap_Flat.png" id="2_174x8"]
+[ext_resource type="Texture2D" uid="uid://7vqlvfa70bvn" path="res://assets/terrain/ground/Tilemap_Elevation.png" id="3_3iu8c"]
+[ext_resource type="Texture2D" uid="uid://1i60selm3w4t" path="res://assets/terrain/ground/Shadows.png" id="4_f48ay"]
+[ext_resource type="Texture2D" uid="uid://b6xfuyf2bpljj" path="res://assets/terrain/Foam.png" id="5_sxg2l"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hw4ap"]
+texture = ExtResource("1_t4mfu")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3iu8c"]
+texture = ExtResource("2_174x8")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ifyxv"]
+texture = ExtResource("3_3iu8c")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8bkj"]
+texture = ExtResource("4_f48ay")
+texture_region_size = Vector2i(64, 64)
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+1:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_da115"]
+texture = ExtResource("5_sxg2l")
+texture_region_size = Vector2i(64, 64)
+0:0/size_in_atlas = Vector2i(3, 3)
+0:0/animation_columns = 8
+0:0/animation_speed = 10.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(64, 64)
+sources/1 = SubResource("TileSetAtlasSource_hw4ap")
+sources/2 = SubResource("TileSetAtlasSource_3iu8c")
+sources/3 = SubResource("TileSetAtlasSource_ifyxv")
+sources/4 = SubResource("TileSetAtlasSource_a8bkj")
+sources/9 = SubResource("TileSetAtlasSource_da115")

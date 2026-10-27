@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://da0kf5ciuom0y"]
+
+[ext_resource type="Script" uid="uid://frb738xwhpki" path="res://scenes/entities/tree/Tree.cs" id="1_4drvb"]
+[ext_resource type="Texture2D" uid="uid://6ypudbdvdqvn" path="res://assets/resources/Tree.png" id="1_hh33m"]
+[ext_resource type="Script" uid="uid://dvllicl37us4k" path="res://scripts/components/HarvestClickComponent.cs" id="2_06rt7"]
+[ext_resource type="Script" uid="uid://ch7bakx60yqdi" path="res://scripts/components/HarvestSpriteFeedbackComponent.cs" id="4_fnbbo"]
+[ext_resource type="Script" uid="uid://dmmsshr7d6e6t" path="res://scripts/components/SpawnEffectFeedbackComponent.cs" id="5_yf60l"]
+[ext_resource type="PackedScene" uid="uid://35ylp64tgslk" path="res://scenes/fx/explosion/explosion.tscn" id="6_8aru3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnbbo"]
+atlas = ExtResource("1_hh33m")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yf60l"]
+atlas = ExtResource("1_hh33m")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh33m"]
+atlas = ExtResource("1_hh33m")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8aru3"]
+atlas = ExtResource("1_hh33m")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyn60"]
+atlas = ExtResource("1_hh33m")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxpgj"]
+atlas = ExtResource("1_hh33m")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_85bfa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnbbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yf60l")
+}],
+"loop": 0,
+"name": &"click",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hh33m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8aru3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyn60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxpgj")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="Tree" type="Area2D" unique_id=736537570 node_paths=PackedStringArray("harvestClickComponent", "harvestSpriteFeedbackComponent", "spawnEffectFeedbackComponent", "sprite")]
+script = ExtResource("1_4drvb")
+harvestClickComponent = NodePath("Components/HarvestClickComponent")
+harvestSpriteFeedbackComponent = NodePath("Components/HarvestSpriteFeedbackComponent")
+spawnEffectFeedbackComponent = NodePath("Components/SpawnEffectFeedbackComponent")
+sprite = NodePath("Sprite")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1768346751]
+position = Vector2(0, -72)
+sprite_frames = SubResource("SpriteFrames_85bfa")
+animation = &"click"
+autoplay = "idle"
+
+[node name="ClickArea" type="CollisionPolygon2D" parent="." unique_id=626649657]
+position = Vector2(0, -72)
+polygon = PackedVector2Array(3, -100, -60, 40, -25, 72, -24, 82, 23, 82, 26, 72, 66, 42)
+
+[node name="Components" type="Node" parent="." unique_id=1533442276]
+
+[node name="HarvestClickComponent" type="Node" parent="Components" unique_id=525258705 node_paths=PackedStringArray("area")]
+script = ExtResource("2_06rt7")
+area = NodePath("../..")
+metadata/_custom_type_script = "uid://dvllicl37us4k"
+
+[node name="HarvestSpriteFeedbackComponent" type="Node" parent="Components" unique_id=1418960249 node_paths=PackedStringArray("target")]
+script = ExtResource("4_fnbbo")
+target = NodePath("../../Sprite")
+metadata/_custom_type_script = "uid://ch7bakx60yqdi"
+
+[node name="SpawnEffectFeedbackComponent" type="Node" parent="Components" unique_id=1048247326]
+script = ExtResource("5_yf60l")
+effectScene = ExtResource("6_8aru3")
+metadata/_custom_type_script = "uid://dmmsshr7d6e6t"

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b6cnr0i8avntu"]
+
+[ext_resource type="Texture2D" uid="uid://dudunnwnnh7gr" path="res://assets/ui/collectibles/Wood.png" id="1_5ubi1"]
+
+[node name="FlyingWood" type="Control" unique_id=1378962277]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=545175831]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_5ubi1")
+stretch_mode = 3
