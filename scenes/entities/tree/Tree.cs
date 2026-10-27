@@ -1,5 +1,7 @@
 using Godot;
 using Game.Components;
+using Game.Common;
+using Game.Globals;
 
 namespace Game.Entities;
 
@@ -20,6 +22,9 @@ public partial class Tree : Area2D
 	[Export]
 	public AnimatedSprite2D sprite;
 
+	[Export]
+	public SoundPool soundPool;
+
 	public override void _Ready()
 	{
 		harvestClickComponent.Clicked += OnTreeClicked;
@@ -33,6 +38,7 @@ public partial class Tree : Area2D
 		harvestSpriteFeedbackComponent.Execute();
 		spawnEffectFeedbackComponent.Execute(GlobalPosition);
 		spawnCollectibleFeedbackComponent.Execute(GlobalPosition);
+		SoundManager.Instance.PlayChoppingWoodSound();
 
 		QueueFree();
 	}

@@ -64,15 +64,14 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Tree" type="Area2D" unique_id=736537570 node_paths=PackedStringArray("harvestClickComponent", "harvestSpriteFeedbackComponent", "spawnEffectFeedbackComponent", "spawnCollectibleFeedbackComponent", "sprite")]
+[node name="Tree" type="Area2D" unique_id=736537570 node_paths=PackedStringArray("harvestClickComponent", "harvestSpriteFeedbackComponent", "spawnEffectFeedbackComponent", "spawnCollectibleFeedbackComponent", "sprite", "soundPool")]
 script = ExtResource("1_4drvb")
-input_pickable = true
-collision_layer = 1
 harvestClickComponent = NodePath("Components/HarvestClickComponent")
 harvestSpriteFeedbackComponent = NodePath("Components/HarvestSpriteFeedbackComponent")
 spawnEffectFeedbackComponent = NodePath("Components/SpawnEffectFeedbackComponent")
 spawnCollectibleFeedbackComponent = NodePath("Components/SpawnCollectibleFeedbackComponent")
 sprite = NodePath("Sprite")
+soundPool = NodePath("")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1768346751]
 position = Vector2(0, -72)

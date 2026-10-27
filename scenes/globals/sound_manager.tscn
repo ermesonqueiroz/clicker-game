@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dkns5em3um3fn"]
+
+[ext_resource type="Script" uid="uid://cba8l7igerdag" path="res://scenes/globals/SoundManager.cs" id="1_u2w14"]
+[ext_resource type="Script" uid="uid://ci503ch8dmlar" path="res://scripts/common/SoundPool.cs" id="2_g3ygq"]
+[ext_resource type="Script" uid="uid://c7xud8saydir4" path="res://scripts/common/SoundQueue.cs" id="3_e0qya"]
+[ext_resource type="AudioStream" uid="uid://ckx3enctc801f" path="res://assets/sfx/chopping_wood/ChoppingWood1.wav" id="4_ktobl"]
+[ext_resource type="AudioStream" uid="uid://co44i4jmk2kgo" path="res://assets/sfx/chopping_wood/ChoppingWood2.wav" id="5_n1l54"]
+
+[node name="SoundManager" type="Node" unique_id=1516358757 node_paths=PackedStringArray("_choppingWoodSoundPool")]
+script = ExtResource("1_u2w14")
+_choppingWoodSoundPool = NodePath("ChoppinWoodSoundPool")
+
+[node name="ChoppinWoodSoundPool" type="Node" parent="." unique_id=1385202520]
+script = ExtResource("2_g3ygq")
+metadata/_custom_type_script = "uid://ci503ch8dmlar"
+
+[node name="SoundQueue" type="Node" parent="ChoppinWoodSoundPool" unique_id=2047388703]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ChoppinWoodSoundPool/SoundQueue" unique_id=1840618668]
+stream = ExtResource("4_ktobl")
+
+[node name="SoundQueue2" type="Node" parent="ChoppinWoodSoundPool" unique_id=1874952517]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ChoppinWoodSoundPool/SoundQueue2" unique_id=142317768]
+stream = ExtResource("5_n1l54")
