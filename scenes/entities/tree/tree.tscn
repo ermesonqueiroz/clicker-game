@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://frb738xwhpki" path="res://scenes/entities/tree/Tree.cs" id="1_4drvb"]
 [ext_resource type="Texture2D" uid="uid://6ypudbdvdqvn" path="res://assets/resources/Tree.png" id="1_hh33m"]
-[ext_resource type="Script" uid="uid://dvllicl37us4k" path="res://scripts/components/HarvestClickComponent.cs" id="2_06rt7"]
-[ext_resource type="Script" uid="uid://ch7bakx60yqdi" path="res://scripts/components/HarvestSpriteFeedbackComponent.cs" id="4_fnbbo"]
+[ext_resource type="Script" uid="uid://nu58tseq4io" path="res://scripts/components/ObjectClickComponent.cs" id="2_06rt7"]
+[ext_resource type="Script" uid="uid://ch7bakx60yqdi" path="res://scripts/components/ClickFeedbackComponent.cs" id="4_fnbbo"]
 [ext_resource type="Script" uid="uid://dmmsshr7d6e6t" path="res://scripts/components/SpawnEffectFeedbackComponent.cs" id="5_yf60l"]
 [ext_resource type="PackedScene" uid="uid://35ylp64tgslk" path="res://scenes/fx/explosion/explosion.tscn" id="6_8aru3"]
 [ext_resource type="Script" uid="uid://c672aqw2o6nce" path="res://scripts/components/SpawnCollectibleFeedbackComponent.cs" id="7_eyn60"]
 [ext_resource type="Texture2D" uid="uid://dudunnwnnh7gr" path="res://assets/ui/collectibles/Wood.png" id="8_sxpgj"]
-[ext_resource type="Script" uid="uid://wdxa321umvk8" path="res://scripts/components/HarvestBreakComponent.cs" id="9_wx3uv"]
+[ext_resource type="Script" uid="uid://wdxa321umvk8" path="res://scripts/components/ClickLimitComponent.cs" id="9_wx3uv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fnbbo"]
 atlas = ExtResource("1_hh33m")
@@ -77,13 +77,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Tree" type="Area2D" unique_id=736537570 node_paths=PackedStringArray("harvestClickComponent", "harvestSpriteFeedbackComponent", "spawnEffectFeedbackComponent", "spawnCollectibleFeedbackComponent", "harvestBreakComponent", "sprite", "_clickArea")]
+[node name="Tree" type="Area2D" unique_id=736537570 node_paths=PackedStringArray("objectClickComponent", "clickFeedbackComponent", "spawnEffectFeedbackComponent", "spawnCollectibleFeedbackComponent", "clickLimitComponent", "sprite", "_clickArea")]
 script = ExtResource("1_4drvb")
-harvestClickComponent = NodePath("Components/HarvestClickComponent")
-harvestSpriteFeedbackComponent = NodePath("Components/HarvestSpriteFeedbackComponent")
+objectClickComponent = NodePath("Components/ObjectClickComponent")
+clickFeedbackComponent = NodePath("Components/ClickFeedbackComponent")
 spawnEffectFeedbackComponent = NodePath("Components/SpawnEffectFeedbackComponent")
 spawnCollectibleFeedbackComponent = NodePath("Components/SpawnCollectibleFeedbackComponent")
-harvestBreakComponent = NodePath("Components/HarvestBreakComponent")
+clickLimitComponent = NodePath("Components/ClickLimitComponent")
 sprite = NodePath("Sprite")
 _clickArea = NodePath(".")
 
@@ -99,12 +99,12 @@ polygon = PackedVector2Array(3, -100, -60, 40, -25, 72, -24, 82, 23, 82, 26, 72,
 
 [node name="Components" type="Node" parent="." unique_id=1533442276]
 
-[node name="HarvestClickComponent" type="Node" parent="Components" unique_id=525258705 node_paths=PackedStringArray("area")]
+[node name="ObjectClickComponent" type="Node" parent="Components" unique_id=525258705 node_paths=PackedStringArray("area")]
 script = ExtResource("2_06rt7")
 area = NodePath("../..")
 metadata/_custom_type_script = "uid://dvllicl37us4k"
 
-[node name="HarvestSpriteFeedbackComponent" type="Node" parent="Components" unique_id=1418960249 node_paths=PackedStringArray("target")]
+[node name="ClickFeedbackComponent" type="Node" parent="Components" unique_id=1418960249 node_paths=PackedStringArray("target")]
 script = ExtResource("4_fnbbo")
 target = NodePath("../../Sprite")
 metadata/_custom_type_script = "uid://ch7bakx60yqdi"
@@ -119,6 +119,6 @@ script = ExtResource("7_eyn60")
 texture = ExtResource("8_sxpgj")
 metadata/_custom_type_script = "uid://c672aqw2o6nce"
 
-[node name="HarvestBreakComponent" type="Node" parent="Components" unique_id=529840990]
+[node name="ClickLimitComponent" type="Node" parent="Components" unique_id=529840990]
 script = ExtResource("9_wx3uv")
 metadata/_custom_type_script = "uid://wdxa321umvk8"

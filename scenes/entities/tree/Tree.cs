@@ -17,10 +17,10 @@ enum TreeState
 public partial class Tree : Area2D, IPoolableObject
 {
 	[Export]
-	public HarvestClickComponent harvestClickComponent;
+	public ObjectClickComponent objectClickComponent;
 
 	[Export]
-	public HarvestSpriteFeedbackComponent harvestSpriteFeedbackComponent;
+	public ClickFeedbackComponent clickFeedbackComponent;
 
 	[Export]
 	public SpawnEffectFeedbackComponent spawnEffectFeedbackComponent;
@@ -29,7 +29,7 @@ public partial class Tree : Area2D, IPoolableObject
 	public SpawnCollectibleFeedbackComponent spawnCollectibleFeedbackComponent;
 
 	[Export]
-	public HarvestBreakComponent harvestBreakComponent;
+	public ClickLimitComponent clickLimitComponent;
 
 	[Export]
 	public AnimatedSprite2D sprite;
@@ -37,38 +37,38 @@ public partial class Tree : Area2D, IPoolableObject
 	[Export]
 	private Area2D _clickArea;
 
-	private readonly StateMachine _stateMachine = new();
+	private readonly StateMachine<TreeState> _stateMachine = new();
 	private ObjectSpawnerComponent _objectSpawner;
 
 	public override void _Ready()
 	{
-		harvestClickComponent.Clicked += () => _stateMachine.ChangeState((int)TreeState.Clicked);
-		harvestBreakComponent.Breaked += () => _stateMachine.ChangeState((int)TreeState.Breaked);
+		objectClickComponent.Clicked += () => _stateMachine.ChangeState(TreeState.Clicked);
+		clickLimitComponent.LimitReached += () => _stateMachine.ChangeState(TreeState.Breaked);
 		sprite.AnimationFinished += OnTreeAnimationFinished;
 
-		_stateMachine.AddState((int)TreeState.Idle, null, IdleEnterState);
-		_stateMachine.AddState((int)TreeState.Clicked, null, ClickedEnterState);
-		_stateMachine.AddState((int)TreeState.Breaked, null, BreakedEnterState);
-		_stateMachine.ChangeState((int)TreeState.Idle);
+		_stateMachine.AddState(TreeState.Idle, null, IdleEnterState);
+		_stateMachine.AddState(TreeState.Clicked, null, ClickedEnterState);
+		_stateMachine.AddState(TreeState.Breaked, null, BreakedEnterState);
+		_stateMachine.ChangeState(TreeState.Idle);
 	}
 
     public void ClickedEnterState()
 	{
 		sprite.Play("click");
-		harvestSpriteFeedbackComponent.Execute();
+		clickFeedbackComponent.Execute();
 		SoundManager.Instance.PlayChoppingWoodSound();
-		harvestBreakComponent.RegisterClick();
+		clickLimitComponent.RegisterClick();
 
-		if (_stateMachine.CurrentStateKey != (int)TreeState.Breaked)
+		if (_stateMachine.CurrentStateKey != TreeState.Breaked)
 		{
-			_stateMachine.ChangeState((int)TreeState.Idle);
+			_stateMachine.ChangeState(TreeState.Idle);
 		}
 	}
 
 	public void BreakedEnterState()
 	{
 		sprite.Play("die");
-		harvestClickComponent.Enabled = false;
+		objectClickComponent.Enabled = false;
 		spawnEffectFeedbackComponent.Execute(GlobalPosition);
 		spawnCollectibleFeedbackComponent.SpawnCollectible(GlobalPosition, 3);
 
@@ -91,14 +91,14 @@ public partial class Tree : Area2D, IPoolableObject
 	{
 		_objectSpawner = spawner;
 		Modulate = Colors.White;
-		harvestBreakComponent.Reset();
-		harvestClickComponent.Enabled = true;
-		_stateMachine.ChangeState((int)TreeState.Idle);
+		clickLimitComponent.Reset();
+		objectClickComponent.Enabled = true;
+		_stateMachine.ChangeState(TreeState.Idle);
 	}
 
 	public void OnPoolDespawned()
 	{
-		harvestClickComponent.Enabled = false;
+		objectClickComponent.Enabled = false;
 	}
 
 	private void OnTreeAnimationFinished()

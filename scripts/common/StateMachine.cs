@@ -4,13 +4,13 @@ using Godot;
 
 namespace Game.Common;
 
-public class StateMachine
+public class StateMachine<T>
 {
-    private readonly Dictionary<int, Dictionary<string, Action>> _states = [];
+    private readonly Dictionary<T, Dictionary<string, Action>> _states = [];
     
-    public int? CurrentStateKey { get; private set; } = null;
+    public T CurrentStateKey { get; private set; }
 
-    public void AddState(int key, Action onUpdate = null, Action onEnter = null, Action onExit = null)
+    public void AddState(T key, Action onUpdate = null, Action onEnter = null, Action onExit = null)
     {
         _states[key] = new Dictionary<string, Action>
         {
@@ -20,7 +20,7 @@ public class StateMachine
         };
     }
 
-    public void ChangeState(int key)
+    public void ChangeState(T key)
     {
         if (!_states.ContainsKey(key))
         {
@@ -31,7 +31,7 @@ public class StateMachine
         Dictionary<string, Action> _currentState = _states[key];
         _currentState.TryGetValue("onExit", out Action exitAction);
 
-        if (CurrentStateKey.HasValue)
+        if (CurrentStateKey != null)
         {
             exitAction?.Invoke();
         }
@@ -45,9 +45,9 @@ public class StateMachine
 
     public void Update()
     {
-        if (CurrentStateKey.HasValue)
+        if (CurrentStateKey != null)
         {
-            _states[CurrentStateKey.Value].TryGetValue("onUpdate", out Action updateAction);
+            _states[CurrentStateKey].TryGetValue("onUpdate", out Action updateAction);
             updateAction?.Invoke();
         }
     }

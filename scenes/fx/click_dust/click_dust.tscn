@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://dyhynuo8e7a1d"]
+
+[ext_resource type="Script" uid="uid://cf4y8e7nax428" path="res://scenes/fx/click_dust/ClickDust.cs" id="1_hlt6m"]
+[ext_resource type="Texture2D" uid="uid://cnrqw7vpleath" path="res://assets/fx/Click.png" id="2_guqob"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ibfy"]
+atlas = ExtResource("2_guqob")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27uwt"]
+atlas = ExtResource("2_guqob")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8xkb"]
+atlas = ExtResource("2_guqob")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmbkm"]
+atlas = ExtResource("2_guqob")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxs8x"]
+atlas = ExtResource("2_guqob")
+region = Rect2(256, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3qr8"]
+atlas = ExtResource("2_guqob")
+region = Rect2(320, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_85bfa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ibfy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27uwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8xkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmbkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxs8x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3qr8")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="ClickDust" type="Node2D" unique_id=361294977 node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_hlt6m")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=101774059]
+position = Vector2(-22, -5)
+sprite_frames = SubResource("SpriteFrames_85bfa")
+autoplay = "default"

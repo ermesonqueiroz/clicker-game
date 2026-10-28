@@ -3,7 +3,7 @@ using Godot;
 namespace Game.Components;
 
 [GlobalClass]
-public partial class HarvestClickComponent : Node
+public partial class ObjectClickComponent : Node
 {
 	[Export]
 	public Area2D area;
@@ -15,7 +15,7 @@ public partial class HarvestClickComponent : Node
 	public bool Enabled
 	{
 		get => area.Monitoring;
-		set => area.Monitoring = value;
+		set => area?.SetDeferred("monitoring", value);
 	}
 
 
