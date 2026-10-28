@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://c8d60s6lbbsmh"]
+
+[ext_resource type="Script" uid="uid://dvvebfr0cj8kj" path="res://scenes/fx/chop/Chop.cs" id="1_2ktca"]
+[ext_resource type="Texture2D" uid="uid://bv2a7hd5rcm8s" path="res://assets/fx/Chop.png" id="2_uj0xs"]
+
+[sub_resource type="Animation" id="Animation_uj0xs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_2ktca"]
+resource_name = "default"
+length = 0.6000100089408457
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"EmitChop"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uj0xs"]
+_data = {
+&"RESET": SubResource("Animation_uj0xs"),
+&"default": SubResource("Animation_2ktca")
+}
+
+[node name="Chop" type="Node2D" unique_id=361294977 node_paths=PackedStringArray("animation")]
+script = ExtResource("1_2ktca")
+animation = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1237469242]
+libraries/ = SubResource("AnimationLibrary_uj0xs")
+autoplay = &"default"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=563876139]
+position = Vector2(-50, -13)
+texture = ExtResource("2_uj0xs")
+hframes = 6
+frame = 1

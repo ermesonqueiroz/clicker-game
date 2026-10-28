@@ -3,6 +3,7 @@ using Game.Components;
 using Game.Common;
 using Game.Globals;
 using System;
+using Game.FX;
 
 namespace Game.Entities;
 
@@ -52,8 +53,14 @@ public partial class Tree : Area2D, IPoolableObject
 		_stateMachine.ChangeState(TreeState.Idle);
 	}
 
-    public void ClickedEnterState()
+    public async void ClickedEnterState()
 	{
+		var chopFx = GD.Load<PackedScene>("res://scenes/fx/chop/chop.tscn").Instantiate<Chop>();
+		chopFx.GlobalPosition = GlobalPosition;
+		GameManager.Instance.AddChild(chopFx);
+
+		await ToSignal(chopFx, Chop.SignalName.Chopped);
+
 		sprite.Play("click");
 		clickFeedbackComponent.Execute();
 		SoundManager.Instance.PlayChoppingWoodSound();
