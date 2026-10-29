@@ -1,4 +1,5 @@
 using Godot;
+using Game.Globals;
 
 namespace Game.Components;
 
@@ -21,17 +22,17 @@ public partial class ObjectClickComponent : Node
 
 	public override void _Ready()
 	{
-		area.InputEvent += OnAreaInputEvent;
+		EventBus.Instance.Subscribe<AreaClickedEvent>(OnAreaClicked);
 	}
 
-	public void OnAreaInputEvent(Node viewport, InputEvent @event, long shapeIdx)
+	public override void _ExitTree()
 	{
-		if (Enabled == false)
-		{
-			return;
-		}
+		EventBus.Instance.Unsubscribe<AreaClickedEvent>(OnAreaClicked);
+	}
 
-		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
+	private void OnAreaClicked(AreaClickedEvent clickEvent)
+	{
+		if (Enabled && area == clickEvent.Area)
 		{
 			EmitSignal(SignalName.Clicked);
 		}

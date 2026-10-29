@@ -4,6 +4,7 @@
 [ext_resource type="TileSet" uid="uid://c6kf8d73vc04d" path="res://resources/tileset/tileset.tres" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://da0kf5ciuom0y" path="res://scenes/entities/tree/tree.tscn" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://bx7gnlq51jv60" path="res://scripts/components/ObjectSpawnerComponent.cs" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bvtio36p0435c" path="res://scenes/common/cursors/axe_cursor/axe_cursor.tscn" id="5_iywne"]
 
 [node name="Game" type="Node2D" unique_id=1028135047 node_paths=PackedStringArray("_objectSpawnerComponent")]
 y_sort_enabled = true
@@ -40,3 +41,5 @@ metadata/_custom_type_script = "uid://bx7gnlq51jv60"
 
 [node name="Tree2" parent="." unique_id=1523230047 instance=ExtResource("2_lnu2h")]
 position = Vector2(656, 479)
+
+[node name="AxeCursor" parent="." unique_id=1629367210 instance=ExtResource("5_iywne")]

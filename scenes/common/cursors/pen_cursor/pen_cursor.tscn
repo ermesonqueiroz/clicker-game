@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bdkorhl1qqcme"]
 
 [ext_resource type="Texture2D" uid="uid://bqrs0q6ed3mke" path="res://assets/ui/cursor/pen.png" id="1_6jdbk"]
-[ext_resource type="Script" uid="uid://kirq6hbrfte6" path="res://scenes/common/pen_cursor/PenCursor.cs" id="2_ri7af"]
+[ext_resource type="Script" uid="uid://kirq6hbrfte6" path="res://scenes/common/cursors/pen_cursor/PenCursor.cs" id="2_ri7af"]
 
 [node name="PenCursor" type="Sprite2D" unique_id=1844955196]
 texture = ExtResource("1_6jdbk")

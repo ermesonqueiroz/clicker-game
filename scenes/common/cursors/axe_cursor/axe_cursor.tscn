@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bvtio36p0435c"]
+
+[ext_resource type="Script" uid="uid://ur6wh78qbdsf" path="res://scenes/common/cursors/axe_cursor/AxeCursor.cs" id="1_v4j8y"]
+
+[node name="AxeCursor" type="Node2D" unique_id=1629367210]
+z_index = 1
+script = ExtResource("1_v4j8y")
+_fillColor = Color(1, 1, 1, 0.25)
+_borderColor = Color(1, 1, 1, 0.8)
