@@ -2,7 +2,6 @@ using Godot;
 using Game.Components;
 using Game.Common;
 using Game.Globals;
-using System;
 using Game.FX;
 
 namespace Game.Entities;
@@ -55,6 +54,7 @@ public partial class Tree : Area2D, IPoolableObject
 
     public async void ClickedEnterState()
 	{
+		objectClickComponent.Enabled = false;
 		var chopFx = GD.Load<PackedScene>("res://scenes/fx/chop/chop.tscn").Instantiate<Chop>();
 		chopFx.GlobalPosition = GlobalPosition;
 		GameManager.Instance.AddChild(chopFx);
@@ -65,6 +65,15 @@ public partial class Tree : Area2D, IPoolableObject
 		clickFeedbackComponent.Execute();
 		SoundManager.Instance.PlayChoppingWoodSound();
 		clickLimitComponent.RegisterClick();
+
+		sprite.SelfModulate = new Color(2f, 2f, 2f, 1f);
+		var tween = GetTree().CreateTween();
+		tween.TweenProperty(
+            sprite, 
+            "self_modulate", 
+            new Color(1f, 1f, 1f, 1f), 
+            0.15
+        );
 
 		if (_stateMachine.CurrentStateKey != TreeState.Breaked)
 		{
@@ -78,6 +87,7 @@ public partial class Tree : Area2D, IPoolableObject
 		objectClickComponent.Enabled = false;
 		spawnEffectFeedbackComponent.Execute(GlobalPosition);
 		spawnCollectibleFeedbackComponent.SpawnCollectible(GlobalPosition, 3);
+		SoundManager.Instance.PlaWoodStackSound();
 
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "modulate:a", 0.0f, 1.0f).SetDelay(3.0f);
@@ -118,6 +128,7 @@ public partial class Tree : Area2D, IPoolableObject
 
 	private void IdleEnterState()
 	{
+		objectClickComponent.Enabled = true;
 		sprite.Play("idle");
 	}
 }

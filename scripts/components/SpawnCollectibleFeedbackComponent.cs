@@ -36,7 +36,10 @@ public partial class SpawnCollectibleFeedbackComponent : Node
 
 			tween.Chain().TweenProperty(collectibleRect, "global_position", GameManager.Instance.woodLabel.GlobalPosition, 1.0f).SetDelay(randomDelay);
 			tween.Parallel().TweenProperty(collectibleRect, "modulate:a", 0.0f, 0.1f).SetDelay(0.9f + randomDelay).SetTrans(Tween.TransitionType.Linear);
-			tween.Chain().TweenCallback(Callable.From(() => collectibleRect.QueueFree()));	
+			tween.Chain().TweenCallback(Callable.From(() => {
+				SoundManager.Instance.PlayPopSound();
+				collectibleRect.QueueFree();
+			}));
 		}
     }
 }

@@ -7,10 +7,22 @@
 [ext_resource type="AudioStream" uid="uid://co44i4jmk2kgo" path="res://assets/sfx/chopping_wood/ChoppingWood2.wav" id="5_n1l54"]
 [ext_resource type="AudioStream" uid="uid://dc5ow050hmiok" path="res://assets/sfx/chopping_wood/ChoppingWood3.wav" id="6_e0qya"]
 [ext_resource type="AudioStream" uid="uid://dnm5iw1a35wip" path="res://assets/sfx/chopping_wood/ChoppingWood4.wav" id="7_ktobl"]
+[ext_resource type="AudioStream" uid="uid://b2i0mxecl6w4k" path="res://assets/sfx/wood_stack/WoodStack1.wav" id="8_ebei2"]
+[ext_resource type="AudioStream" uid="uid://nnn0h6oind6f" path="res://assets/sfx/wood_stack/WoodStack2.wav" id="9_advrv"]
+[ext_resource type="AudioStream" uid="uid://cvdgamisi12ke" path="res://assets/sfx/wood_stack/WoodStack3.wav" id="10_5ux6w"]
+[ext_resource type="AudioStream" uid="uid://d2ob6bq3vdqj" path="res://assets/sfx/wood_stack/WoodStack4.wav" id="11_2d05j"]
+[ext_resource type="AudioStream" uid="uid://dqm272trgclfu" path="res://assets/sfx/wood_stack/WoodStack5.wav" id="12_rxmk8"]
+[ext_resource type="AudioStream" uid="uid://ufmp4enyl4qw" path="res://assets/sfx/pop/Pop1.wav" id="13_plgby"]
+[ext_resource type="AudioStream" uid="uid://bkih04lwppddn" path="res://assets/sfx/pop/Pop2.wav" id="14_vkkye"]
+[ext_resource type="AudioStream" uid="uid://uf0bfv4pap0f" path="res://assets/sfx/pop/Pop3.wav" id="15_kbpma"]
+[ext_resource type="AudioStream" uid="uid://b1ewhjrvyel8b" path="res://assets/sfx/pop/Pop4.wav" id="16_8400i"]
+[ext_resource type="AudioStream" uid="uid://bbe2g77mshi5p" path="res://assets/sfx/pop/Pop5.wav" id="17_4hb2f"]
 
-[node name="SoundManager" type="Node" unique_id=1516358757 node_paths=PackedStringArray("_choppingWoodSoundPool")]
+[node name="SoundManager" type="Node" unique_id=1516358757 node_paths=PackedStringArray("_choppingWoodSoundPool", "_woodStackSoundPool", "_popStackSoundPool")]
 script = ExtResource("1_u2w14")
 _choppingWoodSoundPool = NodePath("ChoppinWoodSoundPool")
+_woodStackSoundPool = NodePath("WoodStackSoundPool")
+_popStackSoundPool = NodePath("PopStackSoundPool")
 
 [node name="ChoppinWoodSoundPool" type="Node" parent="." unique_id=1385202520]
 script = ExtResource("2_g3ygq")
@@ -47,3 +59,91 @@ metadata/_custom_type_script = "uid://c7xud8saydir4"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ChoppinWoodSoundPool/SoundQueue4" unique_id=1262103947]
 stream = ExtResource("7_ktobl")
+
+[node name="WoodStackSoundPool" type="Node" parent="." unique_id=2124065035]
+script = ExtResource("2_g3ygq")
+metadata/_custom_type_script = "uid://ci503ch8dmlar"
+
+[node name="SoundQueue" type="Node" parent="WoodStackSoundPool" unique_id=649095349]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WoodStackSoundPool/SoundQueue" unique_id=856003513]
+stream = ExtResource("8_ebei2")
+
+[node name="SoundQueue2" type="Node" parent="WoodStackSoundPool" unique_id=1503983048]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WoodStackSoundPool/SoundQueue2" unique_id=1917227627]
+stream = ExtResource("9_advrv")
+
+[node name="SoundQueue3" type="Node" parent="WoodStackSoundPool" unique_id=297510707]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WoodStackSoundPool/SoundQueue3" unique_id=1449405729]
+stream = ExtResource("10_5ux6w")
+
+[node name="SoundQueue4" type="Node" parent="WoodStackSoundPool" unique_id=80486492]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WoodStackSoundPool/SoundQueue4" unique_id=1157417572]
+stream = ExtResource("11_2d05j")
+
+[node name="SoundQueue5" type="Node" parent="WoodStackSoundPool" unique_id=1210116278]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WoodStackSoundPool/SoundQueue5" unique_id=701386283]
+stream = ExtResource("12_rxmk8")
+
+[node name="PopStackSoundPool" type="Node" parent="." unique_id=1883617405]
+script = ExtResource("2_g3ygq")
+metadata/_custom_type_script = "uid://ci503ch8dmlar"
+
+[node name="SoundQueue" type="Node" parent="PopStackSoundPool" unique_id=2089160235]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PopStackSoundPool/SoundQueue" unique_id=1212427801]
+stream = ExtResource("13_plgby")
+
+[node name="SoundQueue2" type="Node" parent="PopStackSoundPool" unique_id=1375260411]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PopStackSoundPool/SoundQueue2" unique_id=1892090779]
+stream = ExtResource("14_vkkye")
+
+[node name="SoundQueue3" type="Node" parent="PopStackSoundPool" unique_id=1918872911]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PopStackSoundPool/SoundQueue3" unique_id=1671657427]
+stream = ExtResource("15_kbpma")
+
+[node name="SoundQueue4" type="Node" parent="PopStackSoundPool" unique_id=385277615]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PopStackSoundPool/SoundQueue4" unique_id=1563410634]
+stream = ExtResource("16_8400i")
+
+[node name="SoundQueue5" type="Node" parent="PopStackSoundPool" unique_id=1063913238]
+script = ExtResource("3_e0qya")
+Count = 5
+metadata/_custom_type_script = "uid://c7xud8saydir4"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PopStackSoundPool/SoundQueue5" unique_id=1523986398]
+stream = ExtResource("17_4hb2f")

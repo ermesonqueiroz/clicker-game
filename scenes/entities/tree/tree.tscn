@@ -90,7 +90,7 @@ _clickArea = NodePath(".")
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1768346751]
 position = Vector2(0, -72)
 sprite_frames = SubResource("SpriteFrames_85bfa")
-animation = &"die"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="ClickArea" type="CollisionPolygon2D" parent="." unique_id=626649657]
