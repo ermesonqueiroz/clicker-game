@@ -32,6 +32,9 @@ public partial class Tree : Node2D, IPoolableObject
 	public HealthComponent healthComponent;
 
 	[Export]
+	public DamageLabelSpawnerComponent _damageLabelSpawnerComponent;
+
+	[Export]
 	public AnimatedSprite2D sprite;
 
 	private readonly StateMachine<TreeState> _stateMachine = new();
@@ -63,6 +66,7 @@ public partial class Tree : Node2D, IPoolableObject
 		clickFeedbackComponent.Execute();
 		SoundManager.Instance.PlayChoppingWoodSound();
 		healthComponent.TakeDamage(_pendingDamage);
+		_damageLabelSpawnerComponent.SpawnLabel(_pendingDamage, GlobalPosition);
 
 		sprite.SelfModulate = new Color(2f, 2f, 2f, 1f);
 		var tween = GetTree().CreateTween();
