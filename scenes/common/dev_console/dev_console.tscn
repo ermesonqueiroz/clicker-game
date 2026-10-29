@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://4d7rb6e3ijdk"]
+
+[ext_resource type="Script" uid="uid://b2gt3aiaiilre" path="res://scenes/common/dev_console/DevConsole.cs" id="1_mnkti"]
+
+[node name="DevConsole" type="CanvasLayer" unique_id=120302496 node_paths=PackedStringArray("_lineEdit", "_output")]
+script = ExtResource("1_mnkti")
+_lineEdit = NodePath("Panel/Content/CommandInput")
+_output = NodePath("Panel/Content/Output")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1779395428]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 260.0
+grow_horizontal = 2
+
+[node name="Content" type="VBoxContainer" parent="Panel" unique_id=1409177294]
+layout_mode = 2
+
+[node name="Output" type="RichTextLabel" parent="Panel/Content" unique_id=1807250141]
+custom_minimum_size = Vector2(0, 210)
+layout_mode = 2
+size_flags_vertical = 3
+scroll_following = true
+
+[node name="CommandInput" type="LineEdit" parent="Panel/Content" unique_id=179060269]
+layout_mode = 2
+placeholder_text = "Enter a Godot expression..."

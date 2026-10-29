@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bnaxmro75rr7s" path="res://Main.cs" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://djcyiying6smd" path="res://scenes/game.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dfkboagi0qmlg" path="res://scenes/ui/wood_amount.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://4d7rb6e3ijdk" path="res://scenes/common/dev_console/dev_console.tscn" id="3_dev_console"]
 
 [node name="Main" type="Node2D" unique_id=927466973 node_paths=PackedStringArray("UiContainer")]
 script = ExtResource("1_h2yge")
@@ -36,3 +37,5 @@ metadata/_edit_vertical_guides_ = [767.0]
 visible = false
 layout_mode = 2
 offset_transform_enabled = true
+
+[node name="DevConsole" parent="." unique_id=120302496 instance=ExtResource("3_dev_console")]
