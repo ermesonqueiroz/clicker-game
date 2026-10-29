@@ -18,8 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*uid://jhyjxw7ewqm"
-EventBus="*res://scripts/globals/EventBus.cs"
 SoundManager="*uid://dkns5em3um3fn"
+EventBus="*res://scripts/globals/EventBus.cs"
+GameModifiers="*uid://tto5scttske0"
 
 [display]
 
