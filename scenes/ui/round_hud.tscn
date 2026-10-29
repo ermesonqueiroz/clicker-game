@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ff7m7ayokrrm" path="res://scenes/ui/RoundHud.cs" id="1_hud"]
 
-[node name="RoundHud" type="CanvasLayer" unique_id=594676159 node_paths=PackedStringArray("_roundLabel", "_roundEndedPanel", "_roundEndedLabel", "_nextRoundButton")]
+[node name="RoundHud" type="CanvasLayer" unique_id=594676159 node_paths=PackedStringArray("_roundLabel", "_roundEndedPanel", "_roundEndedLabel", "_woodCollectedLabel", "_pendingWoodLabel", "_nextRoundButton")]
 script = ExtResource("1_hud")
 _roundLabel = NodePath("RoundLabel")
 _roundEndedPanel = NodePath("RoundEndedPanel")
 _roundEndedLabel = NodePath("RoundEndedPanel/Content/RoundEndedLabel")
+_woodCollectedLabel = NodePath("RoundEndedPanel/Content/WoodCollectedLabel")
+_pendingWoodLabel = NodePath("RoundEndedPanel/Content/PendingWoodLabel")
 _nextRoundButton = NodePath("RoundEndedPanel/Content/NextRoundButton")
 
 [node name="RoundLabel" type="Label" parent="." unique_id=1312625279]
@@ -23,10 +25,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -75.0
-offset_right = 180.0
-offset_bottom = 75.0
+offset_left = -200.0
+offset_top = -110.0
+offset_right = 200.0
+offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -38,6 +40,17 @@ theme_override_constants/separation = 16
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Rodada concluída"
+horizontal_alignment = 1
+
+[node name="WoodCollectedLabel" type="Label" parent="RoundEndedPanel/Content"]
+layout_mode = 2
+text = "Madeira coletada: 0"
+horizontal_alignment = 1
+
+[node name="PendingWoodLabel" type="Label" parent="RoundEndedPanel/Content"]
+visible = false
+layout_mode = 2
+text = "Aguardando coleta dos itens..."
 horizontal_alignment = 1
 
 [node name="NextRoundButton" type="Button" parent="RoundEndedPanel/Content" unique_id=653427845]

@@ -1,4 +1,5 @@
 using Godot;
+using Game.Components;
 
 namespace Game.Globals;
 
@@ -9,6 +10,7 @@ public partial class GameManager : Node
 	public Node GameWorld;
 	public Node UiContainer;
 	public Control woodLabel;
+	public RoundController RoundController;
 
 	public override void _Ready()
 	{

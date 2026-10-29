@@ -17,6 +17,8 @@ public partial class RoundController : Node
 
 	public int RoundNumber { get; private set; }
 	public float TimeRemaining { get; private set; }
+	public int WoodCollectedThisRound { get; private set; }
+	public int PendingWoodCollections { get; private set; }
 	public RoundPhase Phase { get; private set; } = RoundPhase.Intermission;
 	public bool IsCollecting => Phase == RoundPhase.Collecting;
 
@@ -28,6 +30,12 @@ public partial class RoundController : Node
 
 	[Signal]
 	public delegate void RoundEndedEventHandler(int roundNumber);
+
+	[Signal]
+	public delegate void WoodCollectedEventHandler(int totalCollected);
+
+	[Signal]
+	public delegate void PendingWoodCollectionsChangedEventHandler(int pendingCollections);
 
 	public override void _Ready()
 	{
@@ -65,17 +73,43 @@ public partial class RoundController : Node
 
 	public void StartNextRound()
 	{
-		if (Phase == RoundPhase.Collecting)
+		if (Phase == RoundPhase.Collecting || PendingWoodCollections > 0)
 		{
 			return;
 		}
 
 		RoundNumber++;
 		TimeRemaining = RoundDurationSeconds;
+		WoodCollectedThisRound = 0;
 		Phase = RoundPhase.Collecting;
 
 		EmitSignal(SignalName.RoundStarted, RoundNumber);
 		EmitSignal(SignalName.TimeChanged, Mathf.CeilToInt(TimeRemaining));
+		EmitSignal(SignalName.WoodCollected, WoodCollectedThisRound);
+	}
+
+	public void RegisterPendingWoodCollections(int amount)
+	{
+		if (amount <= 0)
+		{
+			throw new ArgumentOutOfRangeException(nameof(amount), "Collection amount must be greater than zero.");
+		}
+
+		PendingWoodCollections += amount;
+		EmitSignal(SignalName.PendingWoodCollectionsChanged, PendingWoodCollections);
+	}
+
+	public void RegisterWoodCollected()
+	{
+		if (PendingWoodCollections <= 0)
+		{
+			throw new InvalidOperationException("There are no pending wood collections to complete.");
+		}
+
+		PendingWoodCollections--;
+		WoodCollectedThisRound++;
+		EmitSignal(SignalName.WoodCollected, WoodCollectedThisRound);
+		EmitSignal(SignalName.PendingWoodCollectionsChanged, PendingWoodCollections);
 	}
 
 	private void EndRound()

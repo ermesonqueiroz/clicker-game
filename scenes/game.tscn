@@ -8,10 +8,11 @@
 [ext_resource type="Script" uid="uid://b50hi582uxgf4" path="res://scripts/components/RoundController.cs" id="6_round"]
 [ext_resource type="PackedScene" uid="uid://fjtjka8bknlh" path="res://scenes/ui/round_hud.tscn" id="7_round_hud"]
 
-[node name="Game" type="Node2D" unique_id=1028135047 node_paths=PackedStringArray("_objectSpawnerComponent")]
+[node name="Game" type="Node2D" unique_id=1028135047 node_paths=PackedStringArray("_objectSpawnerComponent", "_roundController")]
 y_sort_enabled = true
 script = ExtResource("1_lnu2h")
 _objectSpawnerComponent = NodePath("Components/ObjectSpawnerComponent")
+_roundController = NodePath("Components/RoundController")
 
 [node name="Terrain" type="Node2D" parent="." unique_id=1207056049]
 
