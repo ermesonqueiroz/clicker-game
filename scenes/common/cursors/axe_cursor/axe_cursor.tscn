@@ -1,9 +1,24 @@
 [gd_scene format=3 uid="uid://bvtio36p0435c"]
 
 [ext_resource type="Script" uid="uid://ur6wh78qbdsf" path="res://scenes/common/cursors/axe_cursor/AxeCursor.cs" id="1_v4j8y"]
+[ext_resource type="Script" uid="uid://b7ehvax7x73p6" path="res://scripts/components/HitBoxComponent.cs" id="2_hitbox"]
 
-[node name="AxeCursor" type="Node2D" unique_id=1629367210]
+[sub_resource type="CircleShape2D" id="HitBoxCircle"]
+radius = 100.0
+
+[node name="AxeCursor" type="Node2D" unique_id=1629367210 node_paths=PackedStringArray("_hitBox")]
 z_index = 1
 script = ExtResource("1_v4j8y")
 _fillColor = Color(1, 1, 1, 0.25)
 _borderColor = Color(1, 1, 1, 0.8)
+_hitBox = NodePath("HitBox")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=394628188 node_paths=PackedStringArray("_collisionShape")]
+collision_layer = 0
+monitoring = false
+monitorable = false
+script = ExtResource("2_hitbox")
+_collisionShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=657252509]
+shape = SubResource("HitBoxCircle")

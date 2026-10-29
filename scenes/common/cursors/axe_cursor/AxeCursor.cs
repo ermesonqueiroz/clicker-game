@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 using Godot;
-using Game.Globals;
+using Game.Components;
 
 namespace Game.Common.Cursors;
 
@@ -22,10 +21,13 @@ public partial class AxeCursor : Node2D
     private Color _borderColor;
 
     [Export]
+    private HitBoxComponent _hitBox;
+
+    [Export]
     private float _idleClickCooldown = 3.0f;
 
     private float _currentRadius = 100.0f;
-    private bool _isContracting = true; // Começa contraindo para o pulso visual
+    private bool _isContracting = true;
     private float _idleClickTimer = 0.0f;
     private bool _isPerformingIdleClick = false;
 
@@ -33,6 +35,7 @@ public partial class AxeCursor : Node2D
     {
         Input.MouseMode = Input.MouseModeEnum.Hidden;
         _currentRadius = _maxRadius;
+        _hitBox.SetRadius(_maxRadius);
     }
 
     public override void _Process(double delta)
@@ -63,7 +66,7 @@ public partial class AxeCursor : Node2D
                     _currentRadius = _minRadius;
                     _isContracting = false;
 
-                    TriggerAreaAction(_currentRadius);
+                    TriggerAreaAction();
                 }
             }
             else
@@ -86,40 +89,8 @@ public partial class AxeCursor : Node2D
         DrawArc(Vector2.Zero, _currentRadius, 0, Mathf.Tau, 64, _borderColor, 2.0f);
     }
 
-    private void TriggerAreaAction(float finalRadius)
+    private async void TriggerAreaAction()
     {
-        DetectObjectsInRadius(finalRadius);
-    }
-
-    private void DetectObjectsInRadius(float radius)
-    {
-        var spaceState = GetWorld2D().DirectSpaceState;
-
-        CircleShape2D shape = new()
-        {
-            Radius = radius
-        };
-
-        PhysicsShapeQueryParameters2D parameters = new()
-        {
-            Shape = shape,
-            Transform = new Transform2D(0, GlobalPosition),
-            CollideWithAreas = true
-        };
-
-        var results = spaceState.IntersectShape(parameters);
-        HashSet<Area2D> clickedAreas = [];
-        
-        foreach (var result in results)
-        {
-            if (result.ContainsKey("collider"))
-            {
-                var collider = result["collider"].As<Node2D>();
-                if (collider is Area2D area && clickedAreas.Add(area))
-                {
-                    EventBus.Instance.Publish(new AreaClickedEvent(area));
-                }
-            }
-        }
+        await _hitBox.Strike(GlobalPosition);
     }
 }

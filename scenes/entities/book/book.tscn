@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://crstu4xrvn17c" path="res://scenes/entities/book/Book.cs" id="1_ywlid"]
 [ext_resource type="Texture2D" uid="uid://dunh18yvo0ooi" path="res://assets/resources/book/Book.png" id="3_j4e1a"]
-[ext_resource type="Script" uid="uid://nu58tseq4io" path="res://scripts/components/ObjectClickComponent.cs" id="3_ywlid"]
 [ext_resource type="Script" uid="uid://ch7bakx60yqdi" path="res://scripts/components/ClickFeedbackComponent.cs" id="4_p1ct5"]
 [ext_resource type="Script" uid="uid://wdxa321umvk8" path="res://scripts/components/ClickLimitComponent.cs" id="5_uhwg0"]
+[ext_resource type="Script" path="res://scripts/components/HurtBox.cs" id="6_hurtbox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85bfa"]
 size = Vector2(32.5, 31.125)
@@ -141,14 +141,17 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Book" type="Area2D" unique_id=729276426 node_paths=PackedStringArray("_sprite", "_objectClickComponent", "_clickFeedbackComponent", "_clickLimitComponent")]
+[node name="Book" type="Area2D" unique_id=729276426 node_paths=PackedStringArray("_sprite", "_hurtBox", "_clickFeedbackComponent", "_clickLimitComponent")]
 script = ExtResource("1_ywlid")
 _sprite = NodePath("Sprite2D")
-_objectClickComponent = NodePath("Components/ObjectClickComponent")
+_hurtBox = NodePath("HurtBox")
 _clickFeedbackComponent = NodePath("Components/ClickFeedbackComponent")
 _clickLimitComponent = NodePath("Components/ClickLimitComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1253120919]
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("6_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(-0.25, 3)
 shape = SubResource("RectangleShape2D_85bfa")
 
@@ -162,12 +165,6 @@ sprite_frames = SubResource("SpriteFrames_85bfa")
 animation = &"turn_page"
 
 [node name="Components" type="Node" parent="." unique_id=1985888111]
-
-[node name="ObjectClickComponent" type="Node" parent="Components" unique_id=1636482418 node_paths=PackedStringArray("area")]
-script = ExtResource("3_ywlid")
-area = NodePath("../..")
-Enabled = true
-metadata/_custom_type_script = "uid://nu58tseq4io"
 
 [node name="ClickFeedbackComponent" type="Node" parent="Components" unique_id=2076672723 node_paths=PackedStringArray("target")]
 script = ExtResource("4_p1ct5")

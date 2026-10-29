@@ -17,7 +17,7 @@ public partial class Book : Area2D
 	private AnimatedSprite2D _sprite;
 	
 	[Export]
-	private ObjectClickComponent _objectClickComponent;
+	private HurtBox _hurtBox;
 
 	[Export]
 	private ClickFeedbackComponent _clickFeedbackComponent;
@@ -31,7 +31,7 @@ public partial class Book : Area2D
 	
 	public override void _Ready()
 	{
-		_objectClickComponent.Clicked += () => _stateMachine.ChangeState(BookState.Clicked);
+		_hurtBox.HitReceived += OnHitReceived;
 
 		_stateMachine.AddState(BookState.Idle, null);
 		_stateMachine.AddState(BookState.Clicked, null, ClickedEnterState);
@@ -57,12 +57,17 @@ public partial class Book : Area2D
 
 	private async void ResetingEnterState()
 	{
-		_objectClickComponent.Enabled = false;
+		_hurtBox.Enabled = false;
 		_clickLimitComponent.Reset();
 		_sprite.Play("turn_page");
 		await ToSignal(_sprite, AnimatedSprite2D.SignalName.AnimationFinished);
 
-		_objectClickComponent.Enabled = true;
+		_hurtBox.Enabled = true;
 		_stateMachine.ChangeState(BookState.Idle);
+	}
+
+	private void OnHitReceived(float _)
+	{
+		_stateMachine.ChangeState(BookState.Clicked);
 	}
 }

@@ -57,5 +57,3 @@ public partial class EventBus : Node
 		}
 	}
 }
-
-public sealed record AreaClickedEvent(Area2D Area);

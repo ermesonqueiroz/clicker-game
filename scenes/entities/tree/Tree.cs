@@ -14,10 +14,10 @@ enum TreeState
 }
 
 
-public partial class Tree : Area2D, IPoolableObject
+public partial class Tree : Node2D, IPoolableObject
 {
 	[Export]
-	public ObjectClickComponent objectClickComponent;
+	public HurtBox hurtBox;
 
 	[Export]
 	public ClickFeedbackComponent clickFeedbackComponent;
@@ -29,22 +29,19 @@ public partial class Tree : Area2D, IPoolableObject
 	public SpawnCollectibleFeedbackComponent spawnCollectibleFeedbackComponent;
 
 	[Export]
-	public ClickLimitComponent clickLimitComponent;
+	public HealthComponent healthComponent;
 
 	[Export]
 	public AnimatedSprite2D sprite;
 
-	[Export]
-	private Area2D _clickArea;
-
 	private readonly StateMachine<TreeState> _stateMachine = new();
 	private ObjectSpawnerComponent _objectSpawner;
+	private float _pendingDamage;
 
 	public override void _Ready()
 	{
-		objectClickComponent.Clicked += () => _stateMachine.ChangeState(TreeState.Clicked);
-		clickLimitComponent.LimitReached += () => _stateMachine.ChangeState(TreeState.Breaked);
-		sprite.AnimationFinished += OnTreeAnimationFinished;
+		hurtBox.HitReceived += OnHitReceived;
+		healthComponent.Died += () => _stateMachine.ChangeState(TreeState.Breaked);
 
 		_stateMachine.AddState(TreeState.Idle, null, IdleEnterState);
 		_stateMachine.AddState(TreeState.Clicked, null, ClickedEnterState);
@@ -54,7 +51,7 @@ public partial class Tree : Area2D, IPoolableObject
 
     public async void ClickedEnterState()
 	{
-		objectClickComponent.Enabled = false;
+		hurtBox.Enabled = false;
 		var chopFx = GD.Load<PackedScene>("res://scenes/fx/chop/chop.tscn").Instantiate<Chop>();
 		chopFx.GlobalPosition = GlobalPosition;
 		GameManager.Instance.AddChild(chopFx);
@@ -62,9 +59,10 @@ public partial class Tree : Area2D, IPoolableObject
 		await ToSignal(chopFx, Chop.SignalName.Chopped);
 
 		sprite.Play("click");
+		GD.Print(sprite.Animation);
 		clickFeedbackComponent.Execute();
 		SoundManager.Instance.PlayChoppingWoodSound();
-		clickLimitComponent.RegisterClick();
+		healthComponent.TakeDamage(_pendingDamage);
 
 		sprite.SelfModulate = new Color(2f, 2f, 2f, 1f);
 		var tween = GetTree().CreateTween();
@@ -75,6 +73,7 @@ public partial class Tree : Area2D, IPoolableObject
             0.15
         );
 
+		await ToSignal(sprite, AnimatedSprite2D.SignalName.AnimationFinished);
 		if (_stateMachine.CurrentStateKey != TreeState.Breaked)
 		{
 			_stateMachine.ChangeState(TreeState.Idle);
@@ -84,7 +83,7 @@ public partial class Tree : Area2D, IPoolableObject
 	public void BreakedEnterState()
 	{
 		sprite.Play("die");
-		objectClickComponent.Enabled = false;
+		hurtBox.Enabled = false;
 		spawnEffectFeedbackComponent.Execute(GlobalPosition);
 		spawnCollectibleFeedbackComponent.SpawnCollectible(GlobalPosition, 3);
 		SoundManager.Instance.PlaWoodStackSound();
@@ -108,27 +107,30 @@ public partial class Tree : Area2D, IPoolableObject
 	{
 		_objectSpawner = spawner;
 		Modulate = Colors.White;
-		clickLimitComponent.Reset();
-		objectClickComponent.Enabled = true;
+		healthComponent.ResetHealth();
+		hurtBox.Enabled = true;
 		_stateMachine.ChangeState(TreeState.Idle);
 	}
 
 	public void OnPoolDespawned()
 	{
-		objectClickComponent.Enabled = false;
-	}
-
-	private void OnTreeAnimationFinished()
-	{
-		if (sprite.Animation == "click")
-		{
-			sprite.Play("idle");
-		}
+		hurtBox.Enabled = false;
 	}
 
 	private void IdleEnterState()
 	{
-		objectClickComponent.Enabled = true;
+		hurtBox.Enabled = true;
 		sprite.Play("idle");
+	}
+
+	private void OnHitReceived(float damage)
+	{
+		if (_stateMachine.CurrentStateKey != TreeState.Idle)
+		{
+			return;
+		}
+
+		_pendingDamage = damage;
+		_stateMachine.ChangeState(TreeState.Clicked);
 	}
 }
