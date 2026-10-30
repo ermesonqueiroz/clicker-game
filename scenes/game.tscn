@@ -5,18 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://da0kf5ciuom0y" path="res://scenes/entities/tree/tree.tscn" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://bx7gnlq51jv60" path="res://scripts/components/ObjectSpawnerComponent.cs" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bvtio36p0435c" path="res://scenes/common/cursors/axe_cursor/axe_cursor.tscn" id="5_iywne"]
-[ext_resource type="Script" uid="uid://8lm23ki0x7lj" path="res://scripts/components/StatsComponent.cs" id="6_gee14"]
 [ext_resource type="Script" uid="uid://b50hi582uxgf4" path="res://scripts/components/RoundController.cs" id="6_round"]
-[ext_resource type="Script" uid="uid://dldjvtwsphlbq" path="res://scripts/resources/stats/Stat.cs" id="7_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://fjtjka8bknlh" path="res://scenes/ui/round_hud.tscn" id="7_round_hud"]
 
-[sub_resource type="Resource" id="Resource_gee14"]
-script = ExtResource("7_0tnpc")
-metadata/_custom_type_script = "uid://dldjvtwsphlbq"
-
-[node name="Game" type="Node2D" unique_id=1028135047]
+[node name="Game" type="Node2D" unique_id=1028135047 node_paths=PackedStringArray("_objectSpawnerComponent", "_roundController")]
 y_sort_enabled = true
 script = ExtResource("1_lnu2h")
+_objectSpawnerComponent = NodePath("Components/ObjectSpawnerComponent")
+_roundController = NodePath("Components/RoundController")
 
 [node name="Terrain" type="Node2D" parent="." unique_id=1207056049]
 
@@ -45,11 +41,6 @@ metadata/_custom_type_script = "uid://bx7gnlq51jv60"
 
 [node name="RoundController" type="Node" parent="Components" unique_id=863441589]
 script = ExtResource("6_round")
-
-[node name="StatsComponent" type="Node" parent="Components" unique_id=58075243]
-script = ExtResource("6_gee14")
-_stats = Array[Resource]([SubResource("Resource_gee14")])
-metadata/_custom_type_script = "uid://8lm23ki0x7lj"
 
 [node name="Tree2" parent="." unique_id=1523230047 instance=ExtResource("2_lnu2h")]
 position = Vector2(656, 479)

@@ -20,15 +20,16 @@ config/icon="res://icon.svg"
 GameManager="*uid://jhyjxw7ewqm"
 SoundManager="*uid://dkns5em3um3fn"
 EventBus="*res://scripts/globals/EventBus.cs"
-GameModifiers="*uid://tto5scttske0"
+StatsManager="*uid://vqh4vxgfgnwr"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/size/window_width_override=1280
 window/size/window_height_override=720
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 
 [dotnet]
 

@@ -1,15 +1,12 @@
 using Godot;
 using Game.Components;
+using Game.Globals;
+using Game.Resources.Stats;
 
 namespace Game.Common.Cursors;
 
 public partial class AxeCursor : Node2D
 {
-    [Export]
-    private float _minRadius = 80.0f;
-    
-    [Export]
-    private float _maxRadius = 100.0f;
     
     [Export]
     private float _contractSpeed = 300.0f;
@@ -29,17 +26,22 @@ public partial class AxeCursor : Node2D
     [Export]
     private float _idleClickCooldown = 3.0f;
 
+    private float _minRadius;
+    private float _maxRadius;
     private float _currentRadius = 100.0f;
     private bool _isContracting = true;
     private float _idleClickTimer = 0.0f;
     private bool _isPerformingIdleClick = false;
     private bool _isEnabled;
 
+    private Stat _idleClickRadius;
+
     public override void _Ready()
     {
         ProcessMode = ProcessModeEnum.Always;
+        _idleClickRadius = StatsManager.Instance.GetStatByID("idle_click_radius");
+        UpdateRadiusFromStat();
         _currentRadius = _maxRadius;
-        _hitBox.SetRadius(_maxRadius);
         _roundController.RoundStarted += OnRoundStarted;
         _roundController.RoundEnded += OnRoundEnded;
         SetEnabled(_roundController.IsCollecting && !GetTree().Paused);
@@ -54,6 +56,7 @@ public partial class AxeCursor : Node2D
 
     public override void _Process(double delta)
     {
+        UpdateRadiusFromStat();
         SetEnabled(_roundController.IsCollecting && !GetTree().Paused);
         if (!_isEnabled)
         {
@@ -141,5 +144,18 @@ public partial class AxeCursor : Node2D
         {
             _isPerformingIdleClick = false;
         }
+    }
+
+    private void UpdateRadiusFromStat()
+    {
+        float radius = (float)_idleClickRadius.Value;
+        if (_maxRadius == radius)
+        {
+            return;
+        }
+
+        _maxRadius = radius;
+        _minRadius = _maxRadius * 0.8f;
+        _hitBox.SetRadius(_maxRadius);
     }
 }

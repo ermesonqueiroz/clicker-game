@@ -9,8 +9,8 @@ radius = 100.0
 [node name="AxeCursor" type="Node2D" unique_id=1629367210 node_paths=PackedStringArray("_hitBox")]
 z_index = 1
 script = ExtResource("1_v4j8y")
-_fillColor = Color(1, 1, 1, 0.25)
-_borderColor = Color(1, 1, 1, 0.8)
+_fillColor = Color(0, 0.4945157, 0.8586215, 0.25)
+_borderColor = Color(0, 0.49446648, 0.85733443, 0.8)
 _hitBox = NodePath("HitBox")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=394628188 node_paths=PackedStringArray("_collisionShape")]

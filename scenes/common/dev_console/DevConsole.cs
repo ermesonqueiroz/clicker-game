@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Game.Globals;
+using Game.Resources.Stats;
 using Godot;
 
 namespace Game.Common.DevConsole;
@@ -24,6 +26,7 @@ public partial class DevConsole : CanvasLayer
 		_output.BbcodeEnabled = false;
 		RegisterCommand("help", _ => $"Available commands: {string.Join(", ", _commands.Keys)}");
 		RegisterCommand("echo", args => string.Join(" ", args));
+		RegisterCommand("apply_modifier", ApplyModifierCommand);
 		AppendOutput("Developer console. Type 'help' to list commands.");
 	}
 
@@ -88,7 +91,7 @@ public partial class DevConsole : CanvasLayer
 			return;
 		}
 
-		Variant result = _expression.Execute();
+		Variant result = _expression.Execute(new Godot.Collections.Array(), this);
 		if (_expression.HasExecuteFailed())
 		{
 			AppendOutput("Expression execution failed. See the Output panel for details.");
@@ -113,6 +116,7 @@ public partial class DevConsole : CanvasLayer
 
 	private void SetConsoleVisible(bool visible)
 	{
+		GetTree().Paused = visible;
 		Visible = visible;
 		if (visible)
 		{
@@ -120,6 +124,7 @@ public partial class DevConsole : CanvasLayer
 		}
 		else
 		{
+
 			_lineEdit.ReleaseFocus();
 		}
 	}
@@ -128,5 +133,36 @@ public partial class DevConsole : CanvasLayer
 	{
 		_output.AppendText($"{message}\n");
 		_output.ScrollToLine(_output.GetLineCount() - 1);
+	}
+
+	private string ApplyModifierCommand(string[] args)
+	{
+		if (args[0] is null)
+		{
+			return "Invalid Stat ID.";
+		}
+
+		if (args[1] is null)
+		{
+			return "Invalid Modifier ID.";
+		}
+
+		Stat stat = StatsManager.Instance.GetStatByID(args[0]);
+
+		if (stat == null)
+		{
+			return "Stat not found.";
+		}
+
+		Modifier modifier = StatsManager.Instance.GetModifierByID(args[1]);
+
+		if (stat == null)
+		{
+			return "Modifier not found.";
+		}
+
+		stat.ApplyModifier(modifier);
+
+		return "Modifier applied successfully!";
 	}
 }

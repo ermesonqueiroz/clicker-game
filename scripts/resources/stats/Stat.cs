@@ -6,13 +6,13 @@ using System.Linq;
 namespace Game.Resources.Stats;
 
 [GlobalClass]
-public partial class Stat : Resource
+public partial class Stat(string ID, double BaseValue) : Resource
 {
     [Export]
-    public string ID;
+    public string ID = ID;
     
     [Export]
-    public double BaseValue;
+    public double BaseValue = BaseValue;
 
     public double Value
     {

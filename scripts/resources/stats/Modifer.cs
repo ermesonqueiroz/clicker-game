@@ -4,8 +4,8 @@ using Godot;
 namespace Game.Resources.Stats;
 
 [GlobalClass]
-public partial class Modifier : Resource
+public partial class Modifier(Callable Formula) : Resource
 {
     [Export]
-    public Callable Formula;
+    public Callable Formula = Formula;
 }
