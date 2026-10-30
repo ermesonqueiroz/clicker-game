@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://dovdx7um8awtl"]
+
+[ext_resource type="Script" uid="uid://chcumkhpdgjyk" path="res://scenes/ui/skill_shop/SkillShop.cs" id="1_sgvjb"]
+[ext_resource type="Texture2D" uid="uid://bs7j51baeuxrc" path="res://assets/ui/banners/Banner.png" id="2_fuj7s"]
+[ext_resource type="Texture2D" uid="uid://cmkoa6wwlgkcd" path="res://assets/ui/banners/Banner_Slots.png" id="3_mxi1p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxi1p"]
+bg_color = Color(0, 0, 0, 0.25)
+corner_detail = 1
+
+[node name="SkillShop" type="CanvasLayer" unique_id=1985172985 node_paths=PackedStringArray("Container")]
+script = ExtResource("1_sgvjb")
+Container = NodePath("PanelContainer/MarginContainer/NinePatchRect/MarginContainer/GridContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2141878712]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mxi1p")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1541631089]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/MarginContainer" unique_id=2040148869]
+layout_mode = 2
+texture = ExtResource("2_fuj7s")
+patch_margin_left = 128
+patch_margin_top = 128
+patch_margin_right = 128
+patch_margin_bottom = 128
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/NinePatchRect" unique_id=1164806848]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/NinePatchRect/MarginContainer" unique_id=1917526660]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 3
+
+[node name="TextureButton" type="TextureButton" parent="PanelContainer/MarginContainer/NinePatchRect/MarginContainer/GridContainer" unique_id=395099296]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_mxi1p")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/NinePatchRect/MarginContainer/GridContainer/TextureButton" unique_id=1645514175]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -11.5
+offset_right = 85.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Alguma coisa AI mane"

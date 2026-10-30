@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Globals;
-using Game.Resources.Stats;
+using Game.Resources.Skills;
 using Godot;
 
 namespace Game.Common.DevConsole;
@@ -26,7 +26,7 @@ public partial class DevConsole : CanvasLayer
 		_output.BbcodeEnabled = false;
 		RegisterCommand("help", _ => $"Available commands: {string.Join(", ", _commands.Keys)}");
 		RegisterCommand("echo", args => string.Join(" ", args));
-		RegisterCommand("apply_modifier", ApplyModifierCommand);
+		RegisterCommand("add_skill", ApplySkillCommand);
 		AppendOutput("Developer console. Type 'help' to list commands.");
 	}
 
@@ -135,34 +135,25 @@ public partial class DevConsole : CanvasLayer
 		_output.ScrollToLine(_output.GetLineCount() - 1);
 	}
 
-	private string ApplyModifierCommand(string[] args)
+	private string ApplySkillCommand(string[] args)
 	{
-		if (args[0] is null)
+		if (args.Length != 1)
 		{
-			return "Invalid Stat ID.";
+			return "Usage: add_skill <skill_id>.";
 		}
 
-		if (args[1] is null)
+		Skill skill = SkillManager.Instance.GetSkillByID(args[0]);
+
+		if (skill == null)
 		{
-			return "Invalid Modifier ID.";
+			return "Skill not found.";
 		}
 
-		Stat stat = StatsManager.Instance.GetStatByID(args[0]);
-
-		if (stat == null)
+		if (!SkillManager.Instance.ApplySkill(skill))
 		{
-			return "Stat not found.";
+			return $"Skill '{skill.ID}' is already unlocked.";
 		}
 
-		Modifier modifier = StatsManager.Instance.GetModifierByID(args[1]);
-
-		if (stat == null)
-		{
-			return "Modifier not found.";
-		}
-
-		stat.ApplyModifier(modifier);
-
-		return "Modifier applied successfully!";
+		return $"Skill '{skill.ID}' unlocked and applied.";
 	}
 }

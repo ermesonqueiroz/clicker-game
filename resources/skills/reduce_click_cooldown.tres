@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dh38wkvlcyepf"]
+
+[ext_resource type="Script" uid="uid://rjbfl355vdu8" path="res://scripts/resources/skills/Skill.cs" id="1_j7a71"]
+[ext_resource type="Script" uid="uid://c4b6cqbu0qtap" path="res://scripts/resources/stats/Modifier.cs" id="1_kipod"]
+
+[sub_resource type="Resource" id="Resource_kipod"]
+script = ExtResource("1_kipod")
+StatID = "idle_click_cooldown"
+Operation = 1
+Value = 2.0
+metadata/_custom_type_script = "uid://c4b6cqbu0qtap"
+
+[resource]
+script = ExtResource("1_j7a71")
+ID = "reduce_click_cooldown"
+Name = "Reduce Click Cooldown"
+Description = "-2 Click Cooldown"
+Modifiers = Array[Object]([SubResource("Resource_kipod")])
+metadata/_custom_type_script = "uid://rjbfl355vdu8"

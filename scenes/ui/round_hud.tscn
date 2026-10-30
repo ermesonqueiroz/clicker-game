@@ -42,12 +42,12 @@ theme_override_font_sizes/font_size = 24
 text = "Rodada concluída"
 horizontal_alignment = 1
 
-[node name="WoodCollectedLabel" type="Label" parent="RoundEndedPanel/Content"]
+[node name="WoodCollectedLabel" type="Label" parent="RoundEndedPanel/Content" unique_id=2070166997]
 layout_mode = 2
 text = "Madeira coletada: 0"
 horizontal_alignment = 1
 
-[node name="PendingWoodLabel" type="Label" parent="RoundEndedPanel/Content"]
+[node name="PendingWoodLabel" type="Label" parent="RoundEndedPanel/Content" unique_id=1523935667]
 visible = false
 layout_mode = 2
 text = "Aguardando coleta dos itens..."

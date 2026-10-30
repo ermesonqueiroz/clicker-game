@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cb0r6plxduif1"]
+
+[ext_resource type="Script" uid="uid://c4b6cqbu0qtap" path="res://scripts/resources/stats/Modifier.cs" id="1_cpuo6"]
+[ext_resource type="Script" uid="uid://rjbfl355vdu8" path="res://scripts/resources/skills/Skill.cs" id="1_naqyq"]
+
+[sub_resource type="Resource" id="Resource_naqyq"]
+script = ExtResource("1_cpuo6")
+StatID = "idle_click_radius"
+Operation = 2
+Value = 2.0
+metadata/_custom_type_script = "uid://c4b6cqbu0qtap"
+
+[resource]
+script = ExtResource("1_naqyq")
+ID = "double_idle_click_radius"
+Name = "Double Idle Click Radius"
+Description = "2x Idle Click Radius"
+Modifiers = Array[Object]([SubResource("Resource_naqyq")])
+metadata/_custom_type_script = "uid://rjbfl355vdu8"

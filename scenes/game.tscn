@@ -7,6 +7,18 @@
 [ext_resource type="PackedScene" uid="uid://bvtio36p0435c" path="res://scenes/common/cursors/axe_cursor/axe_cursor.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://b50hi582uxgf4" path="res://scripts/components/RoundController.cs" id="6_round"]
 [ext_resource type="PackedScene" uid="uid://fjtjka8bknlh" path="res://scenes/ui/round_hud.tscn" id="7_round_hud"]
+[ext_resource type="Script" uid="uid://vqh4vxgfgnwr" path="res://scripts/components/StatsComponent.cs" id="8_stats"]
+[ext_resource type="Script" uid="uid://dldjvtwsphlbq" path="res://scripts/resources/stats/Stat.cs" id="9_stat"]
+
+[sub_resource type="Resource" id="Stat_idle_click_radius"]
+script = ExtResource("9_stat")
+ID = "idle_click_radius"
+BaseValue = 20.0
+
+[sub_resource type="Resource" id="Stat_idle_click_cooldown"]
+script = ExtResource("9_stat")
+ID = "idle_click_cooldown"
+BaseValue = 3.0
 
 [node name="Game" type="Node2D" unique_id=1028135047 node_paths=PackedStringArray("_objectSpawnerComponent", "_roundController")]
 y_sort_enabled = true
@@ -33,6 +45,10 @@ position = Vector2(635, 528)
 
 [node name="Components" type="Node" parent="." unique_id=901299436]
 
+[node name="StatsComponent" type="Node" parent="Components"]
+script = ExtResource("8_stats")
+Stats = Array[Object]([SubResource("Stat_idle_click_radius"), SubResource("Stat_idle_click_cooldown")])
+
 [node name="ObjectSpawnerComponent" type="Node" parent="Components" unique_id=605181599]
 script = ExtResource("4_lbhrr")
 TopLeftPoint = Vector2(300, 300)
@@ -45,8 +61,9 @@ script = ExtResource("6_round")
 [node name="Tree2" parent="." unique_id=1523230047 instance=ExtResource("2_lnu2h")]
 position = Vector2(656, 479)
 
-[node name="AxeCursor" parent="." unique_id=1629367210 node_paths=PackedStringArray("_roundController") instance=ExtResource("5_iywne")]
+[node name="AxeCursor" parent="." unique_id=1629367210 node_paths=PackedStringArray("_roundController", "_statsComponent") instance=ExtResource("5_iywne")]
 _roundController = NodePath("../Components/RoundController")
+_statsComponent = NodePath("../Components/StatsComponent")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1131526551]
 position = Vector2(767, 512)

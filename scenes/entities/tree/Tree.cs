@@ -62,7 +62,6 @@ public partial class Tree : Node2D, IPoolableObject
 		await ToSignal(chopFx, Chop.SignalName.Chopped);
 
 		sprite.Play("click");
-		GD.Print(sprite.Animation);
 		clickFeedbackComponent.Execute();
 		SoundManager.Instance.PlayChoppingWoodSound();
 		healthComponent.TakeDamage(_pendingDamage);

@@ -1,6 +1,5 @@
 using Godot;
 using Game.Components;
-using Game.Globals;
 using Game.Resources.Stats;
 
 namespace Game.Common.Cursors;
@@ -24,7 +23,7 @@ public partial class AxeCursor : Node2D
     private RoundController _roundController;
 
     [Export]
-    private float _idleClickCooldown = 3.0f;
+    private StatsComponent _statsComponent;
 
     private float _minRadius;
     private float _maxRadius;
@@ -35,11 +34,13 @@ public partial class AxeCursor : Node2D
     private bool _isEnabled;
 
     private Stat _idleClickRadius;
+    private Stat _idleClickCooldown;
 
     public override void _Ready()
     {
         ProcessMode = ProcessModeEnum.Always;
-        _idleClickRadius = StatsManager.Instance.GetStatByID("idle_click_radius");
+        _idleClickRadius = _statsComponent.GetStatByID("idle_click_radius");
+        _idleClickCooldown = _statsComponent.GetStatByID("idle_click_cooldown");
         UpdateRadiusFromStat();
         _currentRadius = _maxRadius;
         _roundController.RoundStarted += OnRoundStarted;
@@ -70,7 +71,7 @@ public partial class AxeCursor : Node2D
         if (!_isPerformingIdleClick)
         {
             _idleClickTimer += fDelta;
-            if (_idleClickTimer >= _idleClickCooldown)
+            if (_idleClickTimer >= _idleClickCooldown.Value)
             {
                 _idleClickTimer = 0.0f;
                 _isPerformingIdleClick = true;
