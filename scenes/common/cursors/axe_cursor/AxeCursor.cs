@@ -103,10 +103,10 @@ public partial class AxeCursor : Node2D
         QueueRedraw();
     }
 
-    public override void _Draw()
+    public override void _Draw()    
     {        
-        DrawCircle(Vector2.Zero, _currentRadius, _fillColor);
-        DrawArc(Vector2.Zero, _currentRadius, 0, Mathf.Tau, 64, _borderColor, 2.0f);
+        // DrawCircle(Vector2.Zero, _currentRadius, _fillColor);
+        _DrawDashedCircle();
     }
 
     private async void TriggerAreaAction()
@@ -140,6 +140,24 @@ public partial class AxeCursor : Node2D
         if (!enabled)
         {
             _isPerformingIdleClick = false;
+        }
+    }
+
+    private void _DrawDashedCircle()
+    {
+        const int dashCount = 64;
+        const float dashRatio = 0.5f;
+        const float lineWidth = 4.0f;
+
+        float totalAngle = Mathf.Tau;
+        float stepAngle = totalAngle / dashCount;
+        float dashAngle = stepAngle * dashRatio;
+
+        for (int i = 0; i < dashCount; i++)
+        {
+            float startAngle = i * stepAngle;
+            float endAngle = startAngle + dashAngle;
+            DrawArc(Vector2.Zero, _currentRadius, startAngle, endAngle, 2, _borderColor, lineWidth, true);
         }
     }
 }
