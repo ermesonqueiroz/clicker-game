@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://crynpu1jbbpi7"]
+
+[ext_resource type="Script" uid="uid://ci640ebggpdaw" path="res://scripts/resources/Upgrade.cs" id="1_2rvu5"]
+[ext_resource type="Script" uid="uid://dsa82gmpnxmsy" path="res://scripts/resources/Modifier.cs" id="1_k7sso"]
+[ext_resource type="Resource" uid="uid://dd7him5ioq2e3" path="res://resources/stats/idle_clicker_radius.tres" id="2_dt0xx"]
+
+[sub_resource type="Resource" id="Resource_or4e2"]
+script = ExtResource("1_k7sso")
+Stat = ExtResource("2_dt0xx")
+Value = 20.0
+metadata/_custom_type_script = "uid://dsa82gmpnxmsy"
+
+[resource]
+script = ExtResource("1_2rvu5")
+Cost = 20
+Level = 1
+Modifiers = Array[ExtResource("1_k7sso")]([SubResource("Resource_or4e2")])
+metadata/_custom_type_script = "uid://ci640ebggpdaw"

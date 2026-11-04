@@ -60,9 +60,6 @@ public partial class Tree : Node2D, IPoolableObject
 		GameManager.Instance.AddChild(chopFx);
 
 		await ToSignal(chopFx, Chop.SignalName.Chopped);
-
-		sprite.Play("click");
-		GD.Print(sprite.Animation);
 		clickFeedbackComponent.Execute();
 		SoundManager.Instance.PlayChoppingWoodSound();
 		healthComponent.TakeDamage(_pendingDamage);
@@ -77,7 +74,6 @@ public partial class Tree : Node2D, IPoolableObject
             0.15
         );
 
-		await ToSignal(sprite, AnimatedSprite2D.SignalName.AnimationFinished);
 		if (_stateMachine.CurrentStateKey != TreeState.Breaked)
 		{
 			_stateMachine.ChangeState(TreeState.Idle);

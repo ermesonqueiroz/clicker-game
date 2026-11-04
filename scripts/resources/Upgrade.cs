@@ -1,15 +1,22 @@
 using Godot;
+using Godot.Collections;
 
 namespace Game.Resources;
 
 [GlobalClass]
-public partial class Upgrade(string Name, Texture2D Icon) : Resource
+public partial class Upgrade(int Cost, Upgrade Next, int Level) : Resource
 {
 	[Export]
-	public string Name = Name;
+	public int Cost = Cost;
 
 	[Export]
-	public Texture2D Icon = Icon;
+	public Upgrade Next = Next;
 
-	public Upgrade() : this("", null) {}
+	[Export]
+	public int Level = Level;
+
+	[Export]
+	public Array<Modifier> Modifiers = [];
+
+	public Upgrade() : this(0, null, 0) {}
 }

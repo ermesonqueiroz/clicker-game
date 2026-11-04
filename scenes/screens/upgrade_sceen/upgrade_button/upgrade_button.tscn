@@ -1,0 +1,160 @@
+[gd_scene format=3 uid="uid://dt8v02kq2m8yh"]
+
+[ext_resource type="Texture2D" uid="uid://b8sht4aekwosy" path="res://assets/ui/wood_table/WoodTable_Slots.png" id="1_detpw"]
+[ext_resource type="Script" uid="uid://do4bnep8o4a5s" path="res://scenes/screens/upgrade_sceen/upgrade_button/UpgradeButton.cs" id="1_gcer7"]
+[ext_resource type="Texture2D" uid="uid://c2lkf2hbtuohn" path="res://assets/ui/buttons/TinySquareBlueButton.png" id="2_idn8q"]
+[ext_resource type="Texture2D" uid="uid://c483v8ra7uyd6" path="res://assets/resources/tools/Axe.png" id="2_se4k0"]
+[ext_resource type="Texture2D" uid="uid://b7sua2xs2in3k" path="res://assets/ui/buttons/SmallBlueSquareButton_Regular.png" id="4_gcer7"]
+[ext_resource type="FontFile" uid="uid://rl8l74nggp7v" path="res://assets/fonts/Patrick_Hand/PatrickHand-Regular.ttf" id="4_gph4i"]
+[ext_resource type="Texture2D" uid="uid://hs2l3rfp2d1m" path="res://assets/ui/icons/Icon_03.png" id="5_se4k0"]
+[ext_resource type="Script" uid="uid://bsqtpp8ttamut" path="res://scripts/ui/CustomButton.cs" id="6_p60hh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gph4i"]
+font = ExtResource("4_gph4i")
+font_size = 20
+shadow_color = Color(0, 0, 0, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_detpw"]
+font = ExtResource("4_gph4i")
+font_color = Color(1, 0.86663747, 0, 1)
+shadow_color = Color(0, 0, 0, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_is7d1"]
+font = ExtResource("4_gph4i")
+shadow_color = Color(0, 0, 0, 0.6)
+
+[node name="UpgradeButton" type="Control" unique_id=1339521421 node_paths=PackedStringArray("_titleLabel", "_levelLabel", "_costLabel", "_buyButton")]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+script = ExtResource("1_gcer7")
+_titleLabel = NodePath("MarginContainer/HBoxContainer/VBoxContainer/TitleLabel")
+_levelLabel = NodePath("MarginContainer/HBoxContainer/VBoxContainer/LevelLabel")
+_costLabel = NodePath("MarginContainer/HBoxContainer/HBoxContainer/CostLabel")
+_buyButton = NodePath("MarginContainer/HBoxContainer/BuyButton")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1069685616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_detpw")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=153173914]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=232546277]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Frame" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=2124495668]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_idn8q")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Frame" unique_id=1868014569]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 0
+texture = ExtResource("2_se4k0")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=211508426]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = -6
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1051697997]
+layout_mode = 2
+text = "Increase Idle Click Radius"
+label_settings = SubResource("LabelSettings_gph4i")
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1385822191]
+layout_mode = 2
+text = "Lv. 1"
+label_settings = SubResource("LabelSettings_detpw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1052146444]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CostLabel" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=112512835]
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_is7d1")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=219489098]
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_se4k0")
+stretch_mode = 4
+
+[node name="BuyButton" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1744253035]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("6_p60hh")
+metadata/_custom_type_script = "uid://bsqtpp8ttamut"
+
+[node name="Texture" type="NinePatchRect" parent="MarginContainer/HBoxContainer/BuyButton" unique_id=1237758887]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_gcer7")
+region_rect = Rect2(19, 17, 90, 94)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/BuyButton/Texture" unique_id=586344647]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -16.0
+offset_right = 11.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+label_settings = SubResource("LabelSettings_is7d1")
+horizontal_alignment = 1

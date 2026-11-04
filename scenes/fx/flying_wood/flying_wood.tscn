@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b6cnr0i8avntu"]
 
-[ext_resource type="Texture2D" uid="uid://dudunnwnnh7gr" path="res://assets/ui/collectibles/Wood.png" id="1_5ubi1"]
+[ext_resource type="Texture2D" uid="uid://c8ua31q0jfnrg" path="res://assets/resources/wood/Wood Resource.png" id="1_5ubi1"]
 
 [node name="FlyingWood" type="Control" unique_id=1378962277]
 layout_mode = 3

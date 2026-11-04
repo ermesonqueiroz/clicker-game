@@ -3,36 +3,68 @@
 [ext_resource type="Script" uid="uid://bnaxmro75rr7s" path="res://Main.cs" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://djcyiying6smd" path="res://scenes/game.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dfkboagi0qmlg" path="res://scenes/ui/wood_amount.tscn" id="2_0xm2m"]
+[ext_resource type="FontFile" uid="uid://rl8l74nggp7v" path="res://assets/fonts/Patrick_Hand/PatrickHand-Regular.ttf" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://b7sua2xs2in3k" path="res://assets/ui/buttons/SmallBlueSquareButton_Regular.png" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://b2h7v7wkwplej" path="res://assets/ui/buttons/SmallBlueSquareButton_Pressed.png" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://vhcljueeoku" path="res://scenes/screens/upgrade_sceen/upgrade_screen.tscn" id="7_272bh"]
 
-[node name="Main" type="Node2D" unique_id=927466973 node_paths=PackedStringArray("UiContainer")]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_85bfa"]
+texture = ExtResource("5_7mycd")
+texture_margin_left = 40.0
+texture_margin_top = 40.0
+texture_margin_right = 40.0
+texture_margin_bottom = 40.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_272bh"]
+texture = ExtResource("6_7mycd")
+texture_margin_left = 40.0
+texture_margin_top = 40.0
+texture_margin_right = 40.0
+texture_margin_bottom = 40.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="Main" type="Node2D" unique_id=927466973 node_paths=PackedStringArray("UiContainer", "_upgradeScreenButton", "_upgradeScreen")]
 script = ExtResource("1_h2yge")
-UiContainer = NodePath("CanvasLayer/SubViewportContainer")
+UiContainer = NodePath("CanvasLayer")
+_upgradeScreenButton = NodePath("CanvasLayer/UpgradeScreenButton")
+_upgradeScreen = NodePath("CanvasLayer/UpgradeScreen")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=981078403]
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=621542117]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=472671986]
-handle_input_locally = false
-snap_2d_transforms_to_pixel = true
-canvas_item_default_texture_filter = 0
-physics_object_picking = true
-size = Vector2i(1280, 720)
-render_target_update_mode = 4
-
-[node name="Game" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1028135047 instance=ExtResource("1_ig7tw")]
+[node name="Game" parent="." unique_id=1028135047 instance=ExtResource("1_ig7tw")]
 metadata/_edit_horizontal_guides_ = [511.0]
 metadata/_edit_vertical_guides_ = [767.0]
 
-[node name="WoodAmount" parent="CanvasLayer/SubViewportContainer" unique_id=1162233762 instance=ExtResource("2_0xm2m")]
-visible = false
-layout_mode = 2
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1105230297]
+
+[node name="WoodAmount" parent="CanvasLayer" unique_id=1162233762 instance=ExtResource("2_0xm2m")]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 offset_transform_enabled = true
+
+[node name="UpgradeScreenButton" type="Button" parent="CanvasLayer" unique_id=641535101]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -205.0
+offset_top = -97.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_272bh")
+theme_override_styles/normal = SubResource("StyleBoxTexture_85bfa")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_272bh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_85bfa")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_85bfa")
+theme_override_styles/focus = SubResource("StyleBoxTexture_85bfa")
+text = "Upgrades"
+
+[node name="UpgradeScreen" parent="CanvasLayer" unique_id=1773276042 instance=ExtResource("7_272bh")]

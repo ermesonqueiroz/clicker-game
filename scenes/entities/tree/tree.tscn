@@ -1,61 +1,59 @@
 [gd_scene format=3 uid="uid://da0kf5ciuom0y"]
 
 [ext_resource type="Script" uid="uid://frb738xwhpki" path="res://scenes/entities/tree/Tree.cs" id="1_4drvb"]
-[ext_resource type="Texture2D" uid="uid://6ypudbdvdqvn" path="res://assets/resources/Tree.png" id="1_hh33m"]
+[ext_resource type="Texture2D" uid="uid://ck504uevxpgdt" path="res://assets/resources/trees/Stump 1.png" id="2_8lw36"]
+[ext_resource type="Texture2D" uid="uid://c5dp5154drx54" path="res://assets/resources/trees/Tree1.png" id="3_chpgd"]
 [ext_resource type="Script" uid="uid://ch7bakx60yqdi" path="res://scripts/components/ClickFeedbackComponent.cs" id="4_fnbbo"]
 [ext_resource type="Script" uid="uid://dmmsshr7d6e6t" path="res://scripts/components/SpawnEffectFeedbackComponent.cs" id="5_yf60l"]
 [ext_resource type="PackedScene" uid="uid://35ylp64tgslk" path="res://scenes/fx/explosion/explosion.tscn" id="6_8aru3"]
 [ext_resource type="Script" uid="uid://c672aqw2o6nce" path="res://scripts/components/SpawnCollectibleFeedbackComponent.cs" id="7_eyn60"]
-[ext_resource type="Texture2D" uid="uid://dudunnwnnh7gr" path="res://assets/ui/collectibles/Wood.png" id="8_sxpgj"]
+[ext_resource type="Texture2D" uid="uid://c8ua31q0jfnrg" path="res://assets/resources/wood/Wood Resource.png" id="9_8lw36"]
 [ext_resource type="Script" uid="uid://d1jbqmljgdebs" path="res://scripts/components/HealthComponent.cs" id="9_health"]
 [ext_resource type="Script" uid="uid://bwc8xdmr6esnd" path="res://scripts/components/HurtBox.cs" id="10_hurtbox"]
 [ext_resource type="Script" uid="uid://cp5sjm41vg8f3" path="res://scripts/components/DamageLabelSpawnerComponent.cs" id="10_reecg"]
 [ext_resource type="FontFile" uid="uid://cx4ukquvypade" path="res://assets/fonts/Luckiest_Guy/LuckiestGuy-Regular.ttf" id="11_l4ivi"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fnbbo"]
-atlas = ExtResource("1_hh33m")
-region = Rect2(0, 192, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw3tn"]
+atlas = ExtResource("2_8lw36")
+region = Rect2(0, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yf60l"]
-atlas = ExtResource("1_hh33m")
-region = Rect2(192, 192, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxxr2"]
+atlas = ExtResource("3_chpgd")
+region = Rect2(0, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wx3uv"]
-atlas = ExtResource("1_hh33m")
-region = Rect2(0, 384, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8ytr"]
+atlas = ExtResource("3_chpgd")
+region = Rect2(192, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hh33m"]
-atlas = ExtResource("1_hh33m")
-region = Rect2(0, 0, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw2ru"]
+atlas = ExtResource("3_chpgd")
+region = Rect2(384, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8aru3"]
-atlas = ExtResource("1_hh33m")
-region = Rect2(192, 0, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_653jy"]
+atlas = ExtResource("3_chpgd")
+region = Rect2(576, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_eyn60"]
-atlas = ExtResource("1_hh33m")
-region = Rect2(384, 0, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_16dqs"]
+atlas = ExtResource("3_chpgd")
+region = Rect2(768, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sxpgj"]
-atlas = ExtResource("1_hh33m")
-region = Rect2(576, 0, 192, 192)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohxtd"]
+atlas = ExtResource("3_chpgd")
+region = Rect2(960, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n4mh"]
+atlas = ExtResource("3_chpgd")
+region = Rect2(1152, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hux8l"]
+atlas = ExtResource("3_chpgd")
+region = Rect2(1344, 0, 192, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_85bfa"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fnbbo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yf60l")
-}],
-"loop": 0,
-"name": &"click",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wx3uv")
+"texture": SubResource("AtlasTexture_hw3tn")
 }],
 "loop": 0,
 "name": &"die",
@@ -63,21 +61,36 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hh33m")
+"texture": SubResource("AtlasTexture_fxxr2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8aru3")
+"texture": SubResource("AtlasTexture_l8ytr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eyn60")
+"texture": SubResource("AtlasTexture_bw2ru")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sxpgj")
+"texture": SubResource("AtlasTexture_653jy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16dqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohxtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n4mh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hux8l")
 }],
 "loop": 1,
 "name": &"idle",
 "speed": 10.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85bfa"]
+size = Vector2(64, 64)
 
 [sub_resource type="LabelSettings" id="LabelSettings_l4ivi"]
 font = ExtResource("11_l4ivi")
@@ -101,17 +114,15 @@ sprite = NodePath("Sprite")
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1768346751]
 position = Vector2(0, -72)
 sprite_frames = SubResource("SpriteFrames_85bfa")
-animation = &"click"
+animation = &"idle"
 autoplay = "idle"
-frame = 1
-frame_progress = 1.0
+frame_progress = 0.7457823
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1401354772]
 script = ExtResource("10_hurtbox")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtBox" unique_id=476102913]
-position = Vector2(0, -72)
-polygon = PackedVector2Array(3, -100, -60, 40, -25, 72, -24, 82, 23, 82, 26, 72, 66, 42)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1225438832]
+shape = SubResource("RectangleShape2D_85bfa")
 
 [node name="Components" type="Node" parent="." unique_id=1533442276]
 
@@ -127,7 +138,7 @@ metadata/_custom_type_script = "uid://dmmsshr7d6e6t"
 
 [node name="SpawnCollectibleFeedbackComponent" type="Node" parent="Components" unique_id=277879574]
 script = ExtResource("7_eyn60")
-texture = ExtResource("8_sxpgj")
+texture = ExtResource("9_8lw36")
 metadata/_custom_type_script = "uid://c672aqw2o6nce"
 
 [node name="HealthComponent" type="Node" parent="Components" unique_id=1914295895]

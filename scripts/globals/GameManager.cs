@@ -14,7 +14,7 @@ public partial class GameManager : Node
 
 	public override void _Ready()
 	{
-		woodLabel = GetNodeOrNull<Control>("/root/Main/CanvasLayer/SubViewportContainer/WoodAmount");
+		woodLabel = GetNodeOrNull<Control>("/root/Main/CanvasLayer/WoodAmount");
 		Instance = this;
 	}
 

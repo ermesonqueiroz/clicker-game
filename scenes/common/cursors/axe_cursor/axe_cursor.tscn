@@ -2,16 +2,21 @@
 
 [ext_resource type="Script" uid="uid://ur6wh78qbdsf" path="res://scenes/common/cursors/axe_cursor/AxeCursor.cs" id="1_v4j8y"]
 [ext_resource type="Script" uid="uid://b7ehvax7x73p6" path="res://scripts/components/HitBoxComponent.cs" id="2_hitbox"]
+[ext_resource type="Texture2D" uid="uid://d1740g5vv8421" path="res://assets/ui/cursors/Cursor_02.png" id="3_2p4db"]
+[ext_resource type="Script" uid="uid://ch3bqn4aj7l3s" path="res://scripts/components/StatsComponent.cs" id="4_leqdl"]
+[ext_resource type="Resource" uid="uid://dd7him5ioq2e3" path="res://resources/stats/idle_clicker_radius.tres" id="5_radius"]
+[ext_resource type="Script" uid="uid://do60q7tniuulq" path="res://scripts/resources/Stat.cs" id="5_y6xra"]
 
 [sub_resource type="CircleShape2D" id="HitBoxCircle"]
 radius = 100.0
 
-[node name="AxeCursor" type="Node2D" unique_id=1629367210 node_paths=PackedStringArray("_hitBox")]
+[node name="AxeCursor" type="Node2D" unique_id=1629367210 node_paths=PackedStringArray("_hitBox", "_statsComponent")]
 z_index = 1
 script = ExtResource("1_v4j8y")
-_fillColor = Color(1, 1, 1, 0.25)
+_fillColor = Color(1, 1, 1, 0.8)
 _borderColor = Color(1, 1, 1, 0.8)
 _hitBox = NodePath("HitBox")
+_statsComponent = NodePath("Components/StatsComponent")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=394628188 node_paths=PackedStringArray("_collisionShape")]
 collision_layer = 0
@@ -22,3 +27,17 @@ _collisionShape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=657252509]
 shape = SubResource("HitBoxCircle")
+
+[node name="Cursor" type="Sprite2D" parent="." unique_id=771046447]
+visible = false
+texture = ExtResource("3_2p4db")
+offset = Vector2(7, 13)
+
+[node name="Components" type="Node" parent="." unique_id=969266277]
+
+[node name="StatsComponent" type="Node" parent="Components" unique_id=500071670]
+script = ExtResource("4_leqdl")
+_stats = Dictionary[String, ExtResource("5_y6xra")]({
+"idle_clicker_radius": ExtResource("5_radius")
+})
+metadata/_custom_type_script = "uid://ch3bqn4aj7l3s"

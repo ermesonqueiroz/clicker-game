@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://dfkboagi0qmlg"]
 
-[ext_resource type="Texture2D" uid="uid://dudunnwnnh7gr" path="res://assets/ui/collectibles/Wood.png" id="1_681l7"]
+[ext_resource type="Texture2D" uid="uid://c8ua31q0jfnrg" path="res://assets/resources/wood/Wood Resource.png" id="1_681l7"]
+[ext_resource type="FontFile" uid="uid://rl8l74nggp7v" path="res://assets/fonts/Patrick_Hand/PatrickHand-Regular.ttf" id="2_j0wr1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j0wr1"]
-font_size = 24
+font = ExtResource("2_j0wr1")
+font_size = 32
+outline_color = Color(0.08627451, 0.10980392, 0.18039216, 1)
+shadow_color = Color(0, 0, 0, 0.6)
 
 [node name="WoodAmount" type="Control" unique_id=1162233762]
 layout_mode = 3
@@ -31,5 +35,7 @@ stretch_mode = 3
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=271687070]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -3)
 text = "0"
 label_settings = SubResource("LabelSettings_j0wr1")

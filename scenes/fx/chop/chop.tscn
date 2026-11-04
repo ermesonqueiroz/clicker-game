@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c8d60s6lbbsmh"]
 
 [ext_resource type="Script" uid="uid://dvvebfr0cj8kj" path="res://scenes/fx/chop/Chop.cs" id="1_2ktca"]
-[ext_resource type="Texture2D" uid="uid://bv2a7hd5rcm8s" path="res://assets/fx/Chop.png" id="2_uj0xs"]
+[ext_resource type="Texture2D" uid="uid://b5v6lt4vduacv" path="res://assets/fx/Interact Axe.png" id="2_2ktca"]
 
 [sub_resource type="Animation" id="Animation_uj0xs"]
 length = 0.001
@@ -20,7 +20,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_2ktca"]
 resource_name = "default"
-length = 0.6000100089408457
+length = 0.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -65,6 +65,6 @@ autoplay = &"default"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=563876139]
 position = Vector2(-50, -13)
-texture = ExtResource("2_uj0xs")
+texture = ExtResource("2_2ktca")
 hframes = 6
 frame = 1

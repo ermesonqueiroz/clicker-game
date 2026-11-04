@@ -16,8 +16,6 @@ public partial class SpawnCollectibleFeedbackComponent : Node
 			throw new System.ArgumentOutOfRangeException(nameof(amount), "Collection amount must be greater than zero.");
 		}
 
-		var roundController = GameManager.Instance.RoundController;
-		roundController.RegisterPendingWoodCollections(amount);
 
 		var viewport = GetViewport();
 		var camera = viewport.GetCamera2D();
@@ -46,7 +44,6 @@ public partial class SpawnCollectibleFeedbackComponent : Node
 			tween.Parallel().TweenProperty(collectibleRect, "modulate:a", 0.0f, 0.1f).SetDelay(0.9f + randomDelay).SetTrans(Tween.TransitionType.Linear);
 			tween.Chain().TweenCallback(Callable.From(() => {
 				SoundManager.Instance.PlayPopSound();
-				roundController.RegisterWoodCollected();
 				collectibleRect.QueueFree();
 			}));
 		}

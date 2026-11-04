@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://vhcljueeoku"]
+
+[ext_resource type="Texture2D" uid="uid://7yybixd1idv2" path="res://assets/ui/wood_table/Wood Table.png" id="1_ca5io"]
+[ext_resource type="Script" uid="uid://cpopb6yw6s2c2" path="res://scenes/screens/upgrade_sceen/UpgradeScreen.cs" id="1_fl03k"]
+[ext_resource type="Texture2D" uid="uid://dy1lpjdrjp7su" path="res://assets/ui/icons/Icon_09.png" id="1_q3os7"]
+[ext_resource type="PackedScene" uid="uid://dt8v02kq2m8yh" path="res://scenes/screens/upgrade_sceen/upgrade_button/upgrade_button.tscn" id="2_8ryno"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_85bfa"]
+texture = ExtResource("1_ca5io")
+texture_margin_left = 128.0
+texture_margin_top = 128.0
+texture_margin_right = 128.0
+texture_margin_bottom = 128.0
+expand_margin_left = 32.0
+expand_margin_top = 32.0
+expand_margin_right = 32.0
+expand_margin_bottom = 16.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="Animation" id="Animation_8ryno"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 720)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer2/MarginContainer/UpgradesContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fl03k"]
+resource_name = "enter"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.39999998, 0.59999996),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1280, 0), Vector2(200, 0), Vector2(-100, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer2/MarginContainer/UpgradesContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_apo56"]
+resource_name = "exit"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.4, 0.79999995),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(200, 0), Vector2(-1280, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer2/MarginContainer/UpgradesContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_apo56"]
+_data = {
+&"RESET": SubResource("Animation_8ryno"),
+&"enter": SubResource("Animation_fl03k"),
+&"exit": SubResource("Animation_apo56")
+}
+
+[node name="UpgradeScreen" type="Control" unique_id=1773276042 node_paths=PackedStringArray("_closeButton", "_animationPlayer", "_upgradesContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 720.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fl03k")
+_closeButton = NodePath("TextureButton")
+_animationPlayer = NodePath("AnimationPlayer")
+_upgradesContainer = NodePath("MarginContainer2/MarginContainer/UpgradesContainer")
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=2108829570]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="MarginContainer2" unique_id=325658687]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_85bfa")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2" unique_id=105767018]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="UpgradesContainer" type="VBoxContainer" parent="MarginContainer2/MarginContainer" unique_id=1122178543]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UpgradeButton" parent="MarginContainer2/MarginContainer/UpgradesContainer" unique_id=1339521421 instance=ExtResource("2_8ryno")]
+layout_mode = 2
+
+[node name="UpgradeButton2" parent="MarginContainer2/MarginContainer/UpgradesContainer" unique_id=877465565 instance=ExtResource("2_8ryno")]
+layout_mode = 2
+
+[node name="UpgradeButton3" parent="MarginContainer2/MarginContainer/UpgradesContainer" unique_id=1622992792 instance=ExtResource("2_8ryno")]
+layout_mode = 2
+
+[node name="UpgradeButton4" parent="MarginContainer2/MarginContainer/UpgradesContainer" unique_id=588052849 instance=ExtResource("2_8ryno")]
+layout_mode = 2
+
+[node name="UpgradeButton5" parent="MarginContainer2/MarginContainer/UpgradesContainer" unique_id=1091313758 instance=ExtResource("2_8ryno")]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1964470270]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 1.0
+offset_right = -56.0
+offset_bottom = 65.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_q3os7")
+texture_pressed = ExtResource("1_q3os7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=40574156]
+libraries/ = SubResource("AnimationLibrary_apo56")
