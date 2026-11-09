@@ -3,19 +3,16 @@ using Game.Components;
 using Game.Common;
 using Game.Globals;
 using Game.FX;
+using Game.Resources;
 
 namespace Game.Entities;
 
-enum TreeState
-{
-	Idle,
-	Clicked,
-	Breaked
-}
-
-
 public partial class Tree : Node2D, IPoolableObject
 {
+	private const string IdleStateName = "Idle";
+	private const string ClickedStateName = "Clicked";
+	private const string BreakedStateName = "Breaked";
+
 	[Export]
 	public HurtBox hurtBox;
 
@@ -37,29 +34,47 @@ public partial class Tree : Node2D, IPoolableObject
 	[Export]
 	public AnimatedSprite2D sprite;
 
-	private readonly StateMachine<TreeState> _stateMachine = new();
+	[Export]
+	public Marker2D MarkerLeft;
+
+	[Export]
+	public Marker2D MarkerRight;
+
+	[Export]
+    private StatsComponent _statsComponent;
+
+    private Stat _treeCoinDropStat => _statsComponent.GetStat("tree_coin_drop");
+
+	private readonly StateMachine _stateMachine = new();
 	private ObjectSpawnerComponent _objectSpawner;
 	private float _pendingDamage;
 
 	public override void _Ready()
 	{
-		hurtBox.HitReceived += OnHitReceived;
-		healthComponent.Died += () => _stateMachine.ChangeState(TreeState.Breaked);
+		AddToGroup("trees");
 
-		_stateMachine.AddState(TreeState.Idle, null, IdleEnterState);
-		_stateMachine.AddState(TreeState.Clicked, null, ClickedEnterState);
-		_stateMachine.AddState(TreeState.Breaked, null, BreakedEnterState);
-		_stateMachine.ChangeState(TreeState.Idle);
+		hurtBox.HitReceived += OnHitReceived;
+		healthComponent.Died += () => _stateMachine.ChangeState(BreakedStateName);
+
+		_stateMachine.AddState(IdleStateName, new IdleState(this));
+		_stateMachine.AddState(ClickedStateName, new ClickedState(this));
+		_stateMachine.AddState(BreakedStateName, new BreakedState(this));
+		_stateMachine.ChangeState(IdleStateName);
 	}
 
-    public async void ClickedEnterState()
+    private async void ClickedEnterState()
 	{
 		hurtBox.Enabled = false;
-		var chopFx = GD.Load<PackedScene>("res://scenes/fx/chop/chop.tscn").Instantiate<Chop>();
-		chopFx.GlobalPosition = GlobalPosition;
-		GameManager.Instance.AddChild(chopFx);
+		// var chopFx = GD.Load<PackedScene>("res://scenes/fx/chop/chop.tscn").Instantiate<Chop>();
+		// chopFx.GlobalPosition = GlobalPosition;
+		// GameManager.Instance.AddChild(chopFx);
 
-		await ToSignal(chopFx, Chop.SignalName.Chopped);
+		// await ToSignal(chopFx, Chop.SignalName.Chopped);
+		// if (!_stateMachine.IsCurrentState(ClickedStateName))
+		// {
+		// 	return;
+		// }
+
 		clickFeedbackComponent.Execute();
 		SoundManager.Instance.PlayChoppingWoodSound();
 		healthComponent.TakeDamage(_pendingDamage);
@@ -74,18 +89,18 @@ public partial class Tree : Node2D, IPoolableObject
             0.15
         );
 
-		if (_stateMachine.CurrentStateKey != TreeState.Breaked)
+		if (_stateMachine.IsCurrentState(ClickedStateName))
 		{
-			_stateMachine.ChangeState(TreeState.Idle);
+			_stateMachine.ChangeState(IdleStateName);
 		}
 	}
 
-	public void BreakedEnterState()
+	private void BreakedEnterState()
 	{
 		sprite.Play("die");
 		hurtBox.Enabled = false;
 		spawnEffectFeedbackComponent.Execute(GlobalPosition);
-		spawnCollectibleFeedbackComponent.SpawnCollectible(GlobalPosition, 3);
+		spawnCollectibleFeedbackComponent.SpawnCollectible(GlobalPosition, (int)_treeCoinDropStat.Value);
 		SoundManager.Instance.PlaWoodStackSound();
 
 		Tween tween = GetTree().CreateTween();
@@ -109,7 +124,7 @@ public partial class Tree : Node2D, IPoolableObject
 		Modulate = Colors.White;
 		healthComponent.ResetHealth();
 		hurtBox.Enabled = true;
-		_stateMachine.ChangeState(TreeState.Idle);
+		_stateMachine.ChangeState(IdleStateName);
 	}
 
 	public void OnPoolDespawned()
@@ -125,12 +140,57 @@ public partial class Tree : Node2D, IPoolableObject
 
 	private void OnHitReceived(float damage)
 	{
-		if (_stateMachine.CurrentStateKey != TreeState.Idle)
+		if (!_stateMachine.IsCurrentState(IdleStateName))
 		{
 			return;
 		}
 
 		_pendingDamage = damage;
-		_stateMachine.ChangeState(TreeState.Clicked);
+		_stateMachine.ChangeState(ClickedStateName);
+	}
+
+	private sealed class IdleState : IState
+	{
+		private readonly Tree _tree;
+
+		public IdleState(Tree tree)
+		{
+			_tree = tree;
+		}
+
+		public void Enter() => _tree.IdleEnterState();
+		public void Update(double delta) { }
+		public void PhysicsUpdate(double delta) { }
+		public void Exit() { }
+	}
+
+	private sealed class ClickedState : IState
+	{
+		private readonly Tree _tree;
+
+		public ClickedState(Tree tree)
+		{
+			_tree = tree;
+		}
+
+		public void Enter() => _tree.ClickedEnterState();
+		public void Update(double delta) { }
+		public void PhysicsUpdate(double delta) { }
+		public void Exit() { }
+	}
+
+	private sealed class BreakedState : IState
+	{
+		private readonly Tree _tree;
+
+		public BreakedState(Tree tree)
+		{
+			_tree = tree;
+		}
+
+		public void Enter() => _tree.BreakedEnterState();
+		public void Update(double delta) { }
+		public void PhysicsUpdate(double delta) { }
+		public void Exit() { }
 	}
 }

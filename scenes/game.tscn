@@ -4,11 +4,15 @@
 [ext_resource type="TileSet" uid="uid://c6kf8d73vc04d" path="res://resources/tileset/tileset.tres" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://bx7gnlq51jv60" path="res://scripts/components/ObjectSpawnerComponent.cs" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bvtio36p0435c" path="res://scenes/common/cursors/axe_cursor/axe_cursor.tscn" id="5_iywne"]
+[ext_resource type="Script" uid="uid://c1vjqcc34nw16" path="res://scripts/common/CameraCursorFollow.cs" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://da0kf5ciuom0y" path="res://scenes/entities/tree/tree.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://d1jhwoyeaictl" path="res://scenes/entities/lumberjack/lumberjack.tscn" id="7_u5sy4"]
 
-[node name="Game" type="Node2D" unique_id=1028135047 node_paths=PackedStringArray("_objectSpawnerComponent")]
+[node name="Game" type="Node2D" unique_id=1028135047 node_paths=PackedStringArray("_objectSpawnerComponent", "_spawnObjectTimer")]
 y_sort_enabled = true
 script = ExtResource("1_lnu2h")
 _objectSpawnerComponent = NodePath("Components/ObjectSpawnerComponent")
+_spawnObjectTimer = NodePath("SpawnObjectTimer")
 
 [node name="Terrain" type="Node2D" parent="." unique_id=1207056049]
 
@@ -27,9 +31,6 @@ tile_set = ExtResource("1_yqjtg")
 [node name="AxeCursor" parent="." unique_id=1629367210 instance=ExtResource("5_iywne")]
 position = Vector2(1008, 501)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1131526551]
-position = Vector2(765, 540)
-
 [node name="Components" type="Node" parent="." unique_id=901299436]
 
 [node name="ObjectSpawnerComponent" type="Node" parent="Components" unique_id=605181599]
@@ -37,3 +38,24 @@ script = ExtResource("4_lbhrr")
 TopLeftPoint = Vector2(300, 300)
 BottomRightPoint = Vector2(1250, 725)
 metadata/_custom_type_script = "uid://bx7gnlq51jv60"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1539021760]
+position = Vector2(765, 540)
+limit_left = -100
+limit_top = 10
+limit_right = 1630
+limit_bottom = 1070
+script = ExtResource("5_p57ef")
+
+[node name="SpawnObjectTimer" type="Timer" parent="." unique_id=1156802361]
+wait_time = 2.0
+autostart = true
+
+[node name="Tree" parent="." unique_id=1810604632 instance=ExtResource("6_p57ef")]
+position = Vector2(699, 482)
+
+[node name="Lumberjack" parent="." unique_id=1290778608 instance=ExtResource("7_u5sy4")]
+position = Vector2(349, 662)
+
+[node name="Lumberjack2" parent="." unique_id=1236240648 instance=ExtResource("7_u5sy4")]
+position = Vector2(1134, 681)

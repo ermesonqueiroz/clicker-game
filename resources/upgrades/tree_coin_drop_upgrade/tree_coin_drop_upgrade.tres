@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BaseUpgrade" format=3 uid="uid://q45g04mei26t"]
+
+[ext_resource type="Resource" uid="uid://dmt7xkvc52743" path="res://resources/upgrades/tree_coin_drop_upgrade/tree_coin_drop_upgrade_1.tres" id="1_nj0vx"]
+[ext_resource type="Texture2D" uid="uid://hs2l3rfp2d1m" path="res://assets/ui/icons/Icon_03.png" id="3_opb7i"]
+[ext_resource type="Script" uid="uid://bvcs5o0nbt2bn" path="res://scripts/resources/BaseUpgrade.cs" id="4_osh4l"]
+
+[resource]
+script = ExtResource("4_osh4l")
+Name = "Tree coin drop"
+Icon = ExtResource("3_opb7i")
+Head = ExtResource("1_nj0vx")
+metadata/_custom_type_script = "uid://bvcs5o0nbt2bn"

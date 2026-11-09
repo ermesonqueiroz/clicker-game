@@ -1,5 +1,6 @@
 using Game.Globals;
 using Game.Screens.UpgradeScreen;
+using Game.UI;
 using Godot;
 
 public partial class Main : Node2D
@@ -8,7 +9,7 @@ public partial class Main : Node2D
 	public Node UiContainer;
 
 	[Export]
-	private Button _upgradeScreenButton;
+	private CustomButton _upgradeScreenButton;
 
 	[Export]
 	private UpgradeScreen _upgradeScreen;

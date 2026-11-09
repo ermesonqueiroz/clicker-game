@@ -49,12 +49,14 @@ public partial class HitBoxComponent : Area2D
 			return;
 		}
 
+		var collisionShapeWasDisabled = _collisionShape.Disabled;
 		_isStriking = true;
-		Monitoring = false;
-		GlobalPosition = position;
 
 		try
 		{
+			Monitoring = false;
+			GlobalPosition = position;
+			_collisionShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, false);
 			await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
 			Monitoring = true;
 			await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
@@ -62,7 +64,23 @@ public partial class HitBoxComponent : Area2D
 		finally
 		{
 			Monitoring = false;
+			if (collisionShapeWasDisabled)
+			{
+				_collisionShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+			}
 			_isStriking = false;
+		}
+	}
+
+	public async void StrikeFromAnimation()
+	{
+		try
+		{
+			await Strike(GlobalPosition);
+		}
+		catch (InvalidOperationException exception)
+		{
+			GD.PushError(exception.Message);
 		}
 	}
 

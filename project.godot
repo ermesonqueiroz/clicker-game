@@ -35,6 +35,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Clicker"
 
+[global_group]
+
+trees=""
+
 [input]
 
 harvest={

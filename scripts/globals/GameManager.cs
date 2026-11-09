@@ -1,5 +1,5 @@
 using Godot;
-using Game.Components;
+using Game.Resources;
 
 namespace Game.Globals;
 
@@ -10,12 +10,15 @@ public partial class GameManager : Node
 	public Node GameWorld;
 	public Node UiContainer;
 	public Control woodLabel;
-	public RoundController RoundController;
+
+	public GameData GameData { get; private set; }
 
 	public override void _Ready()
 	{
-		woodLabel = GetNodeOrNull<Control>("/root/Main/CanvasLayer/WoodAmount");
 		Instance = this;
+		woodLabel = GetNodeOrNull<Control>("/root/Main/CanvasLayer/WoodAmount");
+
+		GameData = new GameData();
 	}
 
 	public void AddChild(Node node)

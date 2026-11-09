@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace Game.Globals;
 
 public partial class CursorManager : Node
 {
@@ -12,7 +13,10 @@ public partial class CursorManager : Node
 		Instance = this;
 
 		Input.SetCustomMouseCursor(GD.Load<Texture2D>("res://assets/ui/cursors/Cursor_01.png"));
-		Input.SetCustomMouseCursor(GD.Load<Texture2D>("res://assets/ui/cursors/Cursor_02.png"), Input.CursorShape.PointingHand);
+		Input.SetCustomMouseCursor(GD.Load<Texture2D>("res://assets/ui/cursors/Cursor_02.png"),
+			Input.CursorShape.PointingHand);
+		Input.SetCustomMouseCursor(GD.Load<Texture2D>("res://assets/ui/cursors/Cursor_03.png"),
+			Input.CursorShape.Forbidden);
 	}
 
 	public void EnableIdleCursor()

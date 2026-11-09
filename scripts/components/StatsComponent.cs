@@ -31,12 +31,22 @@ public partial class StatsComponent : Node
 
     public void UpdateStats()
     {
+        foreach (Stat stat in _stats.Values)
+        {
+            stat?.Modifiers.Clear();
+        }
+
         foreach (var entry in UpgradeManager.Instance.GetCurrentUpgrades())
         {
             BaseUpgrade baseUpgrade = entry.Key;
-            Upgrade upgrade = entry.Value;
+            Upgrade currentUpgrade = entry.Value;
 
-            if (upgrade != null)
+            if (currentUpgrade == null)
+            {
+                continue;
+            }
+
+            for (Upgrade upgrade = baseUpgrade.Head; upgrade != null; upgrade = upgrade.Next)
             {
                 foreach (Modifier modifier in upgrade.Modifiers)
                 {
@@ -47,6 +57,11 @@ public partial class StatsComponent : Node
                             stat.Modifiers.Add(modifier);
                         }
                     }
+                }
+
+                if (upgrade == currentUpgrade)
+                {
+                    break;
                 }
             }
         }

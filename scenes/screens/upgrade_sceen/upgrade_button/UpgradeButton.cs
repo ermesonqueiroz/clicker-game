@@ -1,5 +1,6 @@
 using Game.Globals;
 using Game.Resources;
+using Game.UI;
 using Godot;
 using System;
 
@@ -7,9 +8,6 @@ namespace Game.Screens.UpgradeScreen;
 
 public partial class UpgradeButton : Control
 {
-	[Export]
-	public BaseUpgrade BaseUpgrade;
-
 	[Export]
 	private Label _titleLabel;
 	
@@ -20,26 +18,60 @@ public partial class UpgradeButton : Control
 	private Label _costLabel;
 
 	[Export]
-	private Control _buyButton;
+	private TextureRect _iconRect;
 
-	public override void _Ready()
+	[Export]
+	private CustomButton _buyButton;
+
+	private BaseUpgrade _baseUpgrade;
+	private Upgrade _currentUpgrade;
+
+	public void Initialize(BaseUpgrade baseUpgrade)
 	{
-		Upgrade upgrade	= UpgradeManager.Instance.GetNextUpgrade(BaseUpgrade);
+		_baseUpgrade = baseUpgrade ?? throw new ArgumentNullException(nameof(baseUpgrade));
 
-		_titleLabel.Text = BaseUpgrade.Name;
-		_levelLabel.Text = $"Lv. {upgrade.Level}";
-		_costLabel.Text = upgrade.Cost.ToString();
-		_buyButton.GuiInput += OnBuyButtonGuiInput;
+		_currentUpgrade = UpgradeManager.Instance.GetNextUpgrade(_baseUpgrade);
+		if (_currentUpgrade == null)
+		{
+			throw new InvalidOperationException($"Base upgrade '{_baseUpgrade.Name}' has no next upgrade to display.");
+		}
+
+		_titleLabel.Text = _baseUpgrade.Name;
+		_levelLabel.Text = $"Lv. {_currentUpgrade.Level}";
+		_costLabel.Text = _currentUpgrade.Cost.ToString();
+		
+		if (_baseUpgrade.Icon != null)
+		{
+			_iconRect.Texture = _baseUpgrade.Icon;
+		}
+
+		GameManager.Instance.GameData.BalanceChanged += (_) => UpdateDisabled();
+		UpdateDisabled();
+
+		_buyButton.Pressed += OnBuyButtonPressed;
 	}
 
-	public void OnBuyButtonGuiInput(InputEvent @event)
+	public void OnBuyButtonPressed()
 	{
-		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
+		Upgrade nextUpgrade = UpgradeManager.Instance.GetNextUpgrade(_baseUpgrade);
+		if (nextUpgrade != null)
 		{
-			UpgradeManager.Instance.SetCurrentUpgrade(
-				BaseUpgrade, 
-				UpgradeManager.Instance.GetNextUpgrade(BaseUpgrade)
-			);
+			GameManager.Instance.GameData.CoinAmount -= _currentUpgrade.Cost;
+			UpgradeManager.Instance.SetCurrentUpgrade(_baseUpgrade, nextUpgrade);
+		}
+	}
+
+	public void UpdateDisabled()
+	{
+		if (GameManager.Instance.GameData.GetFinalAmount() < _currentUpgrade.Cost && !_buyButton.Disabled)
+		{
+			_buyButton.Disable();
+			return;
+		}
+
+		if (GameManager.Instance.GameData.GetFinalAmount() >= _currentUpgrade.Cost && _buyButton.Disabled)
+		{
+			_buyButton.Enable();
 		}
 	}
 }

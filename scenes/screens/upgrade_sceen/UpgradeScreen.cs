@@ -21,6 +21,7 @@ public partial class UpgradeScreen : Control
 
 	public override void _Ready()
 	{
+		Visible = false;
 		_closeButton.Pressed += Exit;
 		
 		RenderBaseUpgrades();
@@ -42,8 +43,8 @@ public partial class UpgradeScreen : Control
 			}
 
 			UpgradeButton upgradeButton = _upgradeButtonScene.Instantiate<UpgradeButton>();
-			upgradeButton.BaseUpgrade = baseUpgrade;
 			_upgradesContainer.AddChild(upgradeButton);
+			upgradeButton.Initialize(baseUpgrade);
 		}
 	}
 

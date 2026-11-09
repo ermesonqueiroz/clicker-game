@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://b5e4adjn4cbyi" path="res://scenes/globals/upgrade_manager/UpgradeManager.cs" id="1_p7x1h"]
 [ext_resource type="Script" uid="uid://bvcs5o0nbt2bn" path="res://scripts/resources/BaseUpgrade.cs" id="2_p7x1h"]
 [ext_resource type="Resource" uid="uid://cwqw48ye56oqf" path="res://resources/upgrades/idle_clicker_radius/idle_clicker_radius.tres" id="3_7j4oh"]
+[ext_resource type="Resource" uid="uid://q45g04mei26t" path="res://resources/upgrades/tree_coin_drop_upgrade/tree_coin_drop_upgrade.tres" id="4_7j4oh"]
 
 [node name="UpgradeManager" type="Node" unique_id=1506859905]
 script = ExtResource("1_p7x1h")
-AvailableUpgrades = Array[ExtResource("2_p7x1h")]([ExtResource("3_7j4oh")])
+AvailableUpgrades = Array[ExtResource("2_p7x1h")]([ExtResource("3_7j4oh"), ExtResource("4_7j4oh")])

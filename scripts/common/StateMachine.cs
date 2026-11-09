@@ -1,54 +1,50 @@
-using System;
-using System.Collections.Generic;
 using Godot;
 
 namespace Game.Common;
 
-public class StateMachine<T>
+public interface IState
 {
-    private readonly Dictionary<T, Dictionary<string, Action>> _states = [];
-    
-    public T CurrentStateKey { get; private set; }
+    void Enter();
+    void Update(double delta);
+    void PhysicsUpdate(double delta);
+    void Exit();
+}
 
-    public void AddState(T key, Action onUpdate = null, Action onEnter = null, Action onExit = null)
+public class StateMachine
+{
+    private IState _currentState;
+    private readonly System.Collections.Generic.Dictionary<string, IState> _states = new();
+
+    public void AddState(string name, IState state)
     {
-        _states[key] = new Dictionary<string, Action>
-        {
-            { "onUpdate", onUpdate },
-            { "onEnter", onEnter },
-            { "onExit", onExit }
-        };
+        _states[name] = state;
     }
 
-    public void ChangeState(T key)
+    public void ChangeState(string name)
     {
-        if (!_states.ContainsKey(key))
+        if (!_states.ContainsKey(name))
         {
-            GD.PrintErr($"Not found '{key}' state!");
+            GD.PrintErr($"StateMachine: State '{name}' not found!");
             return;
         }
 
-        Dictionary<string, Action> _currentState = _states[key];
-        _currentState.TryGetValue("onExit", out Action exitAction);
-
-        if (CurrentStateKey != null)
-        {
-            exitAction?.Invoke();
-        }
-
-        CurrentStateKey = key;
-        _currentState = _states[key];
-        _currentState.TryGetValue("onEnter", out Action enterAction);
-
-        enterAction?.Invoke();
+        _currentState?.Exit();
+        _currentState = _states[name];
+        _currentState.Enter();
     }
 
-    public void Update()
+    public bool IsCurrentState(string name)
     {
-        if (CurrentStateKey != null)
-        {
-            _states[CurrentStateKey].TryGetValue("onUpdate", out Action updateAction);
-            updateAction?.Invoke();
-        }
+        return _states.TryGetValue(name, out var state) && ReferenceEquals(_currentState, state);
+    }
+
+    public void Update(double delta)
+    {
+        _currentState?.Update(delta);
+    }
+
+    public void PhysicsUpdate(double delta)
+    {
+        _currentState?.PhysicsUpdate(delta);
     }
 }

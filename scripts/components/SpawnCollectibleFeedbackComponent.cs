@@ -16,9 +16,11 @@ public partial class SpawnCollectibleFeedbackComponent : Node
 			throw new System.ArgumentOutOfRangeException(nameof(amount), "Collection amount must be greater than zero.");
 		}
 
-
 		var viewport = GetViewport();
 		var camera = viewport.GetCamera2D();
+
+		GameManager.Instance.GameData.CoinAmount += amount;
+		GameManager.Instance.GameData.PendingCoinAmount += amount;
 
 		for (int i = 0; i < amount; i++)
 		{
@@ -45,6 +47,7 @@ public partial class SpawnCollectibleFeedbackComponent : Node
 			tween.Chain().TweenCallback(Callable.From(() => {
 				SoundManager.Instance.PlayPopSound();
 				collectibleRect.QueueFree();
+				GameManager.Instance.GameData.PendingCoinAmount -= 1;
 			}));
 		}
     }

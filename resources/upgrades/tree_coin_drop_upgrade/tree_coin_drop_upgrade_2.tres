@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3 uid="uid://c0n8hk812wmud"]
+
+[ext_resource type="Script" uid="uid://dsa82gmpnxmsy" path="res://scripts/resources/Modifier.cs" id="1_ka065"]
+[ext_resource type="Script" uid="uid://ci640ebggpdaw" path="res://scripts/resources/Upgrade.cs" id="2_21ncf"]
+[ext_resource type="Resource" uid="uid://d1wdbbx87l4hk" path="res://resources/stats/tree_coin_drop.tres" id="2_d2qix"]
+
+[sub_resource type="Resource" id="Resource_ka065"]
+script = ExtResource("1_ka065")
+Stat = ExtResource("2_d2qix")
+Operation = 2
+Value = 2.0
+metadata/_custom_type_script = "uid://dsa82gmpnxmsy"
+
+[resource]
+script = ExtResource("2_21ncf")
+Cost = 30
+Level = 2
+Modifiers = Array[ExtResource("1_ka065")]([SubResource("Resource_ka065")])
+metadata/_custom_type_script = "uid://ci640ebggpdaw"
