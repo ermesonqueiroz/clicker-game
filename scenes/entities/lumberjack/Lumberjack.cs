@@ -65,7 +65,7 @@ public partial class Lumberjack : CharacterBody2D
 		foreach (var node in trees)
 		{
 			if (node is Tree tree
-				&& tree.healthComponent.CurrentHealth > 0
+				&& tree.HealthComponent.CurrentHealth > 0
 				&& !IsTreeTargetedByAnotherLumberjack(tree))
 			{
 				float distance = GlobalPosition.DistanceTo(tree.GlobalPosition);
@@ -96,7 +96,10 @@ public partial class Lumberjack : CharacterBody2D
 
 	private sealed class LumberjackSearchState : IState
 	{
+		private const double RetryInterval = 1.0;
+
 		private readonly Lumberjack _lumberjack;
+		private double _retryTimer;
 
 		public LumberjackSearchState(Lumberjack lumberjack)
 		{
@@ -105,6 +108,7 @@ public partial class Lumberjack : CharacterBody2D
 
 		public void Enter()
 		{
+			_retryTimer = 0.0;
 			_lumberjack.CurrentTargetTree = null;
 			_lumberjack.Velocity = Vector2.Zero;
 			_lumberjack.AnimationPlayback.Travel("Idle");
@@ -112,6 +116,13 @@ public partial class Lumberjack : CharacterBody2D
 
 		public void Update(double delta)
 		{
+			_retryTimer -= delta;
+			if (_retryTimer > 0.0)
+			{
+				return;
+			}
+
+			_retryTimer = RetryInterval;
 			Tree targetTree = _lumberjack.FindClosestTree();
 
 			if (targetTree != null)
@@ -194,7 +205,7 @@ public partial class Lumberjack : CharacterBody2D
 
 		public void Update(double delta)
 		{
-			if (_lumberjack.CurrentTargetTree.healthComponent.CurrentHealth <= 0)
+			if (_lumberjack.CurrentTargetTree.HealthComponent.CurrentHealth <= 0)
 			{
 				_lumberjack.ChangeState("Search");
 			}

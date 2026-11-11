@@ -9,14 +9,12 @@ public partial class GameManager : Node
 
 	public Node GameWorld;
 	public Node UiContainer;
-	public Control woodLabel;
 
 	public GameData GameData { get; private set; }
 
 	public override void _Ready()
 	{
 		Instance = this;
-		woodLabel = GetNodeOrNull<Control>("/root/Main/CanvasLayer/WoodAmount");
 
 		GameData = new GameData();
 	}

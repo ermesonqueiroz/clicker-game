@@ -35,7 +35,7 @@ script = ExtResource("1_gcer7")
 _titleLabel = NodePath("MarginContainer/HBoxContainer/VBoxContainer/TitleLabel")
 _levelLabel = NodePath("MarginContainer/HBoxContainer/VBoxContainer/LevelLabel")
 _costLabel = NodePath("MarginContainer/HBoxContainer/HBoxContainer/CostLabel")
-_iconRect = NodePath("MarginContainer/HBoxContainer/Frame/MarginContainer/IconRect")
+_iconRect = NodePath("MarginContainer/HBoxContainer/Frame/IconRect")
 _buyButton = NodePath("MarginContainer/HBoxContainer/BuyButton")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1069685616]
@@ -74,20 +74,13 @@ layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("2_idn8q")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/Frame" unique_id=1712799398]
+[node name="IconRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Frame" unique_id=1868014569]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="IconRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Frame/MarginContainer" unique_id=1868014569]
-layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("2_se4k0")
 expand_mode = 2

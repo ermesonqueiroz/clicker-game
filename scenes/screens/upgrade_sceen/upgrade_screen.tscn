@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cpopb6yw6s2c2" path="res://scenes/screens/upgrade_sceen/UpgradeScreen.cs" id="1_fl03k"]
 [ext_resource type="Texture2D" uid="uid://dy1lpjdrjp7su" path="res://assets/ui/icons/Icon_09.png" id="1_q3os7"]
 [ext_resource type="PackedScene" uid="uid://dt8v02kq2m8yh" path="res://scenes/screens/upgrade_sceen/upgrade_button/upgrade_button.tscn" id="2_8ryno"]
+[ext_resource type="PackedScene" uid="uid://d2yi352x8o4el" path="res://scenes/screens/upgrade_sceen/lumberjack_button/lumberjack_button.tscn" id="3_ngdop"]
 [ext_resource type="PackedScene" uid="uid://dfkboagi0qmlg" path="res://scenes/ui/wood_amount/wood_amount.tscn" id="4_apo56"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_85bfa"]
@@ -195,7 +196,10 @@ vertical_scroll_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="UpgradeButton" parent="HBoxContainer/MarginContainer2/MarginContainer/ScrollContainer/UpgradesContainer" unique_id=1339521421 instance=ExtResource("2_8ryno")]
+[node name="LumberjackButton" parent="HBoxContainer/MarginContainer2/MarginContainer/ScrollContainer/UpgradesContainer" unique_id=113440666 instance=ExtResource("3_ngdop")]
+layout_mode = 2
+
+[node name="UpgradeButton" parent="HBoxContainer/MarginContainer2/MarginContainer/ScrollContainer/UpgradesContainer" unique_id=1611308237 instance=ExtResource("2_8ryno")]
 layout_mode = 2
 
 [node name="UpgradeButton2" parent="HBoxContainer/MarginContainer2/MarginContainer/ScrollContainer/UpgradesContainer" unique_id=877465565 instance=ExtResource("2_8ryno")]

@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using Game.Components;
 using Game.Globals;
 using Game.Resources;
@@ -9,16 +8,7 @@ namespace Game.Common.Cursors;
 public partial class AxeCursor : Node2D
 {
     [Export]
-    private float _minRadius = 80.0f;
-    
-    [Export]
     private float _maxRadius = 100.0f;
-    
-    [Export]
-    private float _contractSpeed = 300.0f;
-
-    [Export]
-    private Color _fillColor;
 
     [Export]
     private Color _borderColor;
@@ -27,17 +17,9 @@ public partial class AxeCursor : Node2D
     private HitBoxComponent _hitBox;
 
     [Export]
-    private float _idleClickCooldown = 3.0f;
-
-    [Export]
     private StatsComponent _statsComponent;
 
     private Stat _radiusStat => _statsComponent.GetStat("idle_clicker_radius");
-
-    private float _currentRadius = 100.0f;
-    private bool _isContracting = true;
-    private float _idleClickTimer = 0.0f;
-    private bool _isPerformingIdleClick = false;
 
     public override void _Ready()
     {
@@ -45,7 +27,7 @@ public partial class AxeCursor : Node2D
         UpdateRadius();
     }
 
-    public override void _Process(double delta)
+    public override void _Process(double _)
     {
         UpdateRadius();
         Visible = CursorManager.Instance.IdleCursorEnabled;
@@ -55,74 +37,31 @@ public partial class AxeCursor : Node2D
             return;
         }
 
-        float fDelta = (float)delta;
+        GlobalPosition = GetGlobalMousePosition();
+        // QueueRedraw();
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (!CursorManager.Instance.IdleCursorEnabled || !@event.IsActionPressed("harvest"))
+        {
+            return;
+        }
 
         GlobalPosition = GetGlobalMousePosition();
-
-        if (!_isPerformingIdleClick)
-        {
-            _idleClickTimer += fDelta;
-            if (_idleClickTimer >= _idleClickCooldown)
-            {
-                _idleClickTimer = 0.0f;
-                _isPerformingIdleClick = true;
-                _isContracting = true;
-            }
-            
-            _currentRadius = Mathf.MoveToward(_currentRadius, _maxRadius, _contractSpeed * fDelta);
-        }
-        else
-        {
-            if (_isContracting)
-            {
-                _currentRadius -= _contractSpeed * fDelta;
-                if (_currentRadius <= _minRadius)
-                {
-                    _currentRadius = _minRadius;
-                    _isContracting = false;
-
-                    TriggerAreaAction();
-                }
-            }
-            else
-            {
-                _currentRadius += _contractSpeed * fDelta;
-                if (_currentRadius >= _maxRadius)
-                {
-                    _currentRadius = _maxRadius;
-                    _isPerformingIdleClick = false;
-                }
-            }
-        }
-
+        TriggerAreaAction();
         QueueRedraw();
     }
 
     private void UpdateRadius()
     {
-        float minimumRadiusRatio = _minRadius / _maxRadius;
         _maxRadius = _radiusStat.Value;
-        _minRadius = _maxRadius * minimumRadiusRatio;
         _hitBox.SetRadius(_maxRadius);
     }
 
     public override void _Draw()    
     {
-        if (_idleClickTimer < _idleClickCooldown)
-        {
-            DrawArc(
-                Vector2.Zero,
-                _currentRadius - 8.0f,
-                0.0f,
-                Mathf.Lerp(0.0f, Mathf.Tau, _idleClickTimer / _idleClickCooldown),
-                64,
-                _fillColor,
-                3.0f,
-                true
-            );
-        }
-
-        _DrawDashedCircle(Vector2.Zero, _currentRadius, _borderColor);
+        // _DrawDashedCircle(Vector2.Zero, _maxRadius, _borderColor);
     }
 
     private async void TriggerAreaAction()
@@ -144,10 +83,6 @@ public partial class AxeCursor : Node2D
             ? Input.MouseModeEnum.Hidden
             : Input.MouseModeEnum.Visible;
 
-        if (!enabled)
-        {
-            _isPerformingIdleClick = false;
-        }
     }
 
     private void _DrawDashedCircle(Vector2 position, float radius, Color color)

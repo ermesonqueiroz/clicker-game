@@ -6,8 +6,12 @@ public partial class GameData : Resource
     [Signal]
     public delegate void BalanceChangedEventHandler(int finalAmount);
 
+    [Signal]
+    public delegate void LumberjackAmountChangedEventHandler(int amount);
+
     private int _coinAmount;
-    private int _pendingCoinAmount;
+
+    private int _lumberjackAmount;
 
     [Export]
     public int CoinAmount
@@ -24,18 +28,18 @@ public partial class GameData : Resource
     }
 
     [Export]
-    public int PendingCoinAmount
+    public int LumberjackAmount
     {
-        get => _pendingCoinAmount;
+        get => _lumberjackAmount;
         set
         {
-            if (_pendingCoinAmount != value)
+            if (_lumberjackAmount != value)
             {
-                _pendingCoinAmount = value;
-                EmitSignal(SignalName.BalanceChanged, GetFinalAmount());
+                _lumberjackAmount = value;
+                EmitSignal(SignalName.LumberjackAmountChanged, _lumberjackAmount);
             }
         }
     }
 
-    public int GetFinalAmount() => _coinAmount - _pendingCoinAmount;
+    public int GetFinalAmount() => _coinAmount;
 }

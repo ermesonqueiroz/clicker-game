@@ -9,6 +9,9 @@ public partial class HealthComponent : Node
 	[Export]
 	public float MaxHealth = 10.0f;
 
+	[Export]
+	public HurtBox HurtBox { get; private set; }
+
 	public float CurrentHealth { get; private set; }
 
 	[Signal]
@@ -25,6 +28,7 @@ public partial class HealthComponent : Node
 		}
 
 		CurrentHealth = MaxHealth;
+		HurtBox.HitReceived += TakeDamage;
 	}
 
 	public void TakeDamage(float amount)

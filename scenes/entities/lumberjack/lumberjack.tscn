@@ -420,7 +420,6 @@ hframes = 8
 vframes = 3
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1853091697]
-debug_enabled = true
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1897228656]
 tree_root = SubResource("AnimationNodeStateMachine_is7d1")
@@ -441,3 +440,6 @@ metadata/_custom_type_script = "uid://b7ehvax7x73p6"
 position = Vector2(-46, -18)
 shape = SubResource("CircleShape2D_vvwn5")
 disabled = true
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=782453115]
+vertices = PackedVector2Array(-21, 13, 21, 13, 21, -13, -21, -13)

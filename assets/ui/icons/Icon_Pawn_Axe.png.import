@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwclth4tccgh1"
-path="res://.godot/imported/Stump 3.png-8b3646f62a2ac21bfd301249d678e02c.ctex"
+uid="uid://ggncihcp3ikp"
+path="res://.godot/imported/Icon_Pawn_Axe.png-d8da557ba33cd2e212360fc35743edc9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/resources/trees/Stump 3.png"
-dest_files=["res://.godot/imported/Stump 3.png-8b3646f62a2ac21bfd301249d678e02c.ctex"]
+source_file="res://assets/ui/icons/Icon_Pawn_Axe.png"
+dest_files=["res://.godot/imported/Icon_Pawn_Axe.png-d8da557ba33cd2e212360fc35743edc9.ctex"]
 
 [params]
 

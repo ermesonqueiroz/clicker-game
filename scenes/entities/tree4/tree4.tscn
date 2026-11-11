@@ -1,0 +1,319 @@
+[gd_scene format=3 uid="uid://cimr4adfs1px6"]
+
+[ext_resource type="Script" uid="uid://b4yj74m38ery7" path="res://scripts/entities/Tree.cs" id="1_7gfxs"]
+[ext_resource type="Texture2D" uid="uid://wp4oxvagvycb" path="res://assets/resources/trees/Tree4.png" id="2_7gfxs"]
+[ext_resource type="Texture2D" uid="uid://ddo762cftoywg" path="res://assets/fx/Dust_01.png" id="3_sqspc"]
+[ext_resource type="Script" uid="uid://bwc8xdmr6esnd" path="res://scripts/components/HurtBox.cs" id="4_nq6co"]
+[ext_resource type="Script" uid="uid://c672aqw2o6nce" path="res://scripts/components/SpawnCollectibleFeedbackComponent.cs" id="5_y1q8w"]
+[ext_resource type="Texture2D" uid="uid://hs2l3rfp2d1m" path="res://assets/ui/icons/Icon_03.png" id="6_kxe07"]
+[ext_resource type="FontFile" uid="uid://cx4ukquvypade" path="res://assets/fonts/Luckiest_Guy/LuckiestGuy-Regular.ttf" id="7_30s04"]
+[ext_resource type="Script" uid="uid://d1jbqmljgdebs" path="res://scripts/components/HealthComponent.cs" id="8_w4ip2"]
+[ext_resource type="Script" uid="uid://ch3bqn4aj7l3s" path="res://scripts/components/StatsComponent.cs" id="9_k6ybd"]
+[ext_resource type="Script" uid="uid://do60q7tniuulq" path="res://scripts/resources/Stat.cs" id="10_mp0u6"]
+[ext_resource type="Resource" uid="uid://g6tmimtpcuuk" path="res://resources/stats/trees/tree4_wood_drop_amount.tres" id="13_myk6a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vvwn5"]
+radius = 28.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_8lw36"]
+font = ExtResource("7_30s04")
+font_size = 32
+font_color = Color(0.9137255, 0.9411765, 0.26666668, 1)
+outline_size = 2
+outline_color = Color(0.08627451, 0.11372549, 0.18039216, 1)
+shadow_size = 2
+shadow_color = Color(0.086104214, 0.11207495, 0.17923622, 1)
+
+[sub_resource type="Animation" id="Animation_chpgd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Texture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Texture:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Texture:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/DustParticles:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/DustParticles:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fxxr2"]
+resource_name = "click"
+length = 0.20001000298038127
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Texture:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Texture:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.8247963, 1.8247963, 1.8247963, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Texture:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20001),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [-0.17453292519943295, 0.17453292519943295, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/DustParticles:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_l8ytr"]
+resource_name = "die"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Texture:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Texture:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.8247963, 1.8247963, 1.8247963, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Texture:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20001),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [-0.17453292519943295, 0.17453292519943295, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Texture:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/DustParticles:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/DustParticles:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.4901161e-08, 0.100000024, 0.20000002, 0.3, 0.40000004, 0.5, 0.6, 0.70000005),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_8lw36"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_chpgd"]
+_data = {
+&"RESET": SubResource("Animation_chpgd"),
+&"click": SubResource("Animation_fxxr2"),
+&"die": SubResource("Animation_l8ytr"),
+&"idle": SubResource("Animation_8lw36")
+}
+
+[node name="Tree4" type="Node2D" unique_id=1810604632 node_paths=PackedStringArray("HurtBox", "spawnCollectibleFeedbackComponent", "HealthComponent", "Sprite", "AnimationPlayer", "MarkerLeft", "MarkerRight", "StatsComponent") groups=["trees"]]
+script = ExtResource("1_7gfxs")
+HurtBox = NodePath("HurtBox")
+spawnCollectibleFeedbackComponent = NodePath("Components/SpawnCollectibleFeedbackComponent")
+HealthComponent = NodePath("Components/HealthComponent")
+Sprite = NodePath("Sprites/Texture")
+AnimationPlayer = NodePath("AnimationPlayer")
+MarkerLeft = NodePath("MarkerLeft")
+MarkerRight = NodePath("MarkerRight")
+StatsComponent = NodePath("Components/StatsComponent")
+
+[node name="Sprites" type="Node2D" parent="." unique_id=920924755]
+
+[node name="Texture" type="Sprite2D" parent="Sprites" unique_id=1818562409]
+texture = ExtResource("2_7gfxs")
+offset = Vector2(0, -100)
+hframes = 8
+vframes = 2
+
+[node name="DustParticles" type="Sprite2D" parent="Sprites" unique_id=1518172047]
+visible = false
+texture = ExtResource("3_sqspc")
+hframes = 8
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1401354772]
+script = ExtResource("4_nq6co")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1225438832]
+shape = SubResource("CircleShape2D_vvwn5")
+debug_color = Color(0, 1, 0.21209751, 0.42000002)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=2117987023]
+vertices = PackedVector2Array(-30, 14, 30, 14, 30, -21, -30, -21)
+
+[node name="MarkerLeft" type="Marker2D" parent="." unique_id=1435996760]
+position = Vector2(-56, 14)
+
+[node name="MarkerRight" type="Marker2D" parent="." unique_id=1277468473]
+position = Vector2(56, 14)
+
+[node name="Components" type="Node" parent="." unique_id=1533442276]
+
+[node name="SpawnCollectibleFeedbackComponent" type="Node" parent="Components" unique_id=277879574]
+script = ExtResource("5_y1q8w")
+texture = ExtResource("6_kxe07")
+_labelSettings = SubResource("LabelSettings_8lw36")
+metadata/_custom_type_script = "uid://c672aqw2o6nce"
+
+[node name="HealthComponent" type="Node" parent="Components" unique_id=1914295895 node_paths=PackedStringArray("HurtBox")]
+script = ExtResource("8_w4ip2")
+MaxHealth = 3.0
+HurtBox = NodePath("../../HurtBox")
+
+[node name="StatsComponent" type="Node" parent="Components" unique_id=556999779]
+script = ExtResource("9_k6ybd")
+_stats = Dictionary[String, ExtResource("10_mp0u6")]({
+"tree_coin_drop": ExtResource("13_myk6a")
+})
+metadata/_custom_type_script = "uid://ch3bqn4aj7l3s"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=316959812]
+libraries/ = SubResource("AnimationLibrary_chpgd")
+autoplay = &"idle"

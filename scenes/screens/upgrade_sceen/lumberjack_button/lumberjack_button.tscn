@@ -1,0 +1,160 @@
+[gd_scene format=3 uid="uid://d2yi352x8o4el"]
+
+[ext_resource type="Script" uid="uid://cixsc7gwmpbi7" path="res://scenes/screens/upgrade_sceen/lumberjack_button/LumberjackButton.cs" id="1_6bhdf"]
+[ext_resource type="Texture2D" uid="uid://b8sht4aekwosy" path="res://assets/ui/wood_table/WoodTable_Slots.png" id="1_lauyj"]
+[ext_resource type="Texture2D" uid="uid://c2lkf2hbtuohn" path="res://assets/ui/buttons/TinySquareBlueButton.png" id="2_6bhdf"]
+[ext_resource type="Texture2D" uid="uid://ggncihcp3ikp" path="res://assets/ui/icons/Icon_Pawn_Axe.png" id="3_kbxjr"]
+[ext_resource type="FontFile" uid="uid://rl8l74nggp7v" path="res://assets/fonts/Patrick_Hand/PatrickHand-Regular.ttf" id="4_6i35u"]
+[ext_resource type="Texture2D" uid="uid://hs2l3rfp2d1m" path="res://assets/ui/icons/Icon_03.png" id="5_vk0nh"]
+[ext_resource type="Script" uid="uid://bsqtpp8ttamut" path="res://scripts/ui/CustomButton.cs" id="6_qd2rj"]
+[ext_resource type="Texture2D" uid="uid://b7sua2xs2in3k" path="res://assets/ui/buttons/SmallBlueSquareButton_Regular.png" id="7_i7ers"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gph4i"]
+font = ExtResource("4_6i35u")
+font_size = 20
+shadow_color = Color(0, 0, 0, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_detpw"]
+font = ExtResource("4_6i35u")
+font_color = Color(1, 0.86663747, 0, 1)
+shadow_color = Color(0, 0, 0, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_is7d1"]
+font = ExtResource("4_6i35u")
+shadow_color = Color(0, 0, 0, 0.6)
+
+[node name="LumberjackButton" type="Control" unique_id=113440666 node_paths=PackedStringArray("_buyButton", "_costLabel", "_quantityLabel")]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+script = ExtResource("1_6bhdf")
+_buyButton = NodePath("MarginContainer/HBoxContainer/BuyButton")
+_costLabel = NodePath("MarginContainer/HBoxContainer/HBoxContainer/CostLabel")
+_quantityLabel = NodePath("MarginContainer/HBoxContainer/VBoxContainer/QuantityLabel")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1837378867]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_lauyj")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1917429606]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1225520935]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Frame" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1624182785]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_6bhdf")
+
+[node name="IconRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Frame" unique_id=1377146290]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_kbxjr")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=319990046]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = -6
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=602027355]
+layout_mode = 2
+text = "Lumberjack"
+label_settings = SubResource("LabelSettings_gph4i")
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1300715850]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_detpw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1099911962]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CostLabel" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1170924721]
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_is7d1")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=824813601]
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_vk0nh")
+stretch_mode = 4
+
+[node name="BuyButton" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1452861437]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("6_qd2rj")
+metadata/_custom_type_script = "uid://bsqtpp8ttamut"
+
+[node name="Texture" type="NinePatchRect" parent="MarginContainer/HBoxContainer/BuyButton" unique_id=304716264]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_i7ers")
+region_rect = Rect2(19, 17, 90, 94)
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/BuyButton/Texture" unique_id=442365725]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -16.0
+offset_right = 11.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+label_settings = SubResource("LabelSettings_is7d1")
+horizontal_alignment = 1

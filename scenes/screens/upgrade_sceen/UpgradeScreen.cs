@@ -32,6 +32,11 @@ public partial class UpgradeScreen : Control
 	{
 		foreach (Control child in _upgradesContainer.GetChildren().Cast<Control>())
 		{
+			if (child is LumberjackButton)
+			{
+				continue;
+			}
+
 			child.QueueFree();
 		}
 

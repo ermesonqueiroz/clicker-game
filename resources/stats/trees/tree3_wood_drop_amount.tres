@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Stat" format=3 uid="uid://cqpgtumws8sf0"]
+
+[ext_resource type="Script" uid="uid://dsa82gmpnxmsy" path="res://scripts/resources/Modifier.cs" id="1_f2lbv"]
+[ext_resource type="Script" uid="uid://do60q7tniuulq" path="res://scripts/resources/Stat.cs" id="2_a443s"]
+
+[resource]
+script = ExtResource("2_a443s")
+BaseValue = 32.0
+metadata/_custom_type_script = "uid://do60q7tniuulq"
