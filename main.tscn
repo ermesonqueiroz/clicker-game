@@ -103,6 +103,7 @@ horizontal_alignment = 1
 z_index = 1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1780310156]
+visible = false
 z_index = 2
 material = SubResource("ShaderMaterial_272bh")
 anchors_preset = 15

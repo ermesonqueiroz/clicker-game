@@ -35,6 +35,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Clicker"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gaea/editor/plugin.cfg", "res://addons/gaea/plugin.cfg", "res://addons/gaea/runtime/plugin.cfg")
+
 [global_group]
 
 trees=""

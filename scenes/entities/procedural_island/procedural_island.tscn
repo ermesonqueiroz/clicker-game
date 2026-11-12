@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://dmcwinfcxbbh7"]
+
+[ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/runtime/scene_nodes/generator.gd" id="1_grwgp"]
+[ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/runtime/resources/materials/data/tilemap_material.gd" id="2_1mfjg"]
+[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/runtime/resources/layer.gd" id="2_pmj8w"]
+[ext_resource type="Script" uid="uid://rfsrtakmflly" path="res://addons/gaea/runtime/scene_nodes/threading/task_pool.gd" id="2_t0js0"]
+[ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="3_1mfjg"]
+[ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/runtime/scene_nodes/renderers/tilemap_renderer.gd" id="3_7ec0v"]
+[ext_resource type="TileSet" uid="uid://c6kf8d73vc04d" path="res://resources/tileset/tileset.tres" id="7_1mfjg"]
+
+[sub_resource type="Resource" id="Resource_1382s"]
+script = ExtResource("2_1mfjg")
+type = 1
+preview_color = Color(0.80147934, 0.87438655, 0.04153812, 1)
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
+[sub_resource type="Resource" id="Resource_7baqx"]
+script = ExtResource("2_pmj8w")
+
+[sub_resource type="Resource" id="Resource_1mfjg"]
+script = ExtResource("3_1mfjg")
+layers = Array[ExtResource("2_pmj8w")]([SubResource("Resource_7baqx")])
+preview_seed = 501907465
+preview_world_size = Vector3i(64, 64, 1)
+preview_chunk_size = Vector3i(64, 64, 1)
+save_version = 5
+_connections = Array[StringName]([&"1-0-2-0", &"3-0-2-1", &"2-0-0-0"])
+_node_data = Dictionary[int, Dictionary]({
+0: {
+&"position": Vector2(1220, 360),
+&"salt": 1751944945,
+&"type": 0,
+&"uid": "uid://dol7xviglksx4"
+},
+1: {
+&"position": Vector2(360, 40),
+&"salt": 1118995280,
+&"type": 0,
+&"uid": "uid://cgjyi804j05dy"
+},
+2: {
+&"arguments": {
+&"range": {
+"max": 1.0,
+"min": 0.0
+}
+},
+&"position": Vector2(740, 200),
+&"salt": 2983189837,
+&"type": 0,
+&"uid": "uid://djjvx650evm0n"
+},
+3: {
+&"arguments": {
+&"name": "GrassMaterial"
+},
+&"position": Vector2(340, 400),
+&"salt": 2768913306,
+&"type": 0,
+&"uid": "uid://cqs1w714pbfql"
+}
+})
+_parameters = Dictionary[StringName, Variant]({
+&"GrassMaterial": {
+"hint": 17,
+"hint_string": "GaeaMaterial",
+"name": &"GrassMaterial",
+"type": 24,
+"usage": 4,
+"value": SubResource("Resource_1382s")
+}
+})
+metadata/_custom_type_script = "uid://dae6umbqb872e"
+
+[sub_resource type="Resource" id="Resource_pmj8w"]
+script = ExtResource("2_t0js0")
+
+[node name="ProceduralIsland" type="Node2D" unique_id=527893506]
+
+[node name="GaeaGenerator" type="Node" parent="." unique_id=632298613]
+script = ExtResource("1_grwgp")
+graph = SubResource("Resource_1mfjg")
+task_pool = SubResource("Resource_pmj8w")
+metadata/_custom_type_script = "uid://d4feanreabm81"
+
+[node name="TileMapGaeaRenderer" type="Node" parent="." unique_id=56106602 node_paths=PackedStringArray("tile_map_layers", "generator")]
+script = ExtResource("3_7ec0v")
+tile_map_layers = [NodePath("../TileMapLayer")]
+generator = NodePath("../GaeaGenerator")
+metadata/_custom_type_script = "uid://b4x16tyyfihmb"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=224457726]
+tile_set = ExtResource("7_1mfjg")
